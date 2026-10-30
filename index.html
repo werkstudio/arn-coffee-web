@@ -811,9 +811,11 @@
         </filter>
     </svg>
     <div style="display: none;">
-        <!-- Preload berry models to avoid lag during switch -->
-        <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb"></model-viewer>
+        <!-- Preload 3D models to eliminate lag during flavor switch -->
         <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb"></model-viewer>
+        <model-viewer src="assets/models/coffee-bean.glb"></model-viewer>
+        <model-viewer src="assets/models/ice-cube.glb"></model-viewer>
+        <model-viewer src="assets/models/palm-sugar.glb"></model-viewer>
     </div>
 
     <!-- 5. Interactive Motion & Choreography Script -->
@@ -839,7 +841,7 @@
         let activeFlavorIndex = 0;
         const flavors = ['berry', 'classic', 'strong'];
 
-        // Flavor configurations
+        // Flavor configurations with thematic 3D floating elements
         const flavorConfigs = {
             berry: {
                 name: 'Berry Americano',
@@ -847,7 +849,9 @@
                 desc: 'Unleash the electric collision of bold espresso and wild tart berries. A crisp, fruity burst of pure caffeine energy — redefined in every drop.',
                 sideTitle: '<span class="outline">Wildly</span><br>Electric',
                 bottleSrc: 'assets/bottles/bottle-berry-americano.png',
-                modelSrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb',
+                models: [
+                    'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+                ],
                 colors: { inner: '#801625', mid: '#420b13', outer: '#160407' },
                 accent: '#ff5376'
             },
@@ -857,7 +861,10 @@
                 desc: 'Velvety fresh milk infused with authentic Indonesian gula aren and slow-dripped espresso. Unapologetically smooth, deeply comforting.',
                 sideTitle: '<span class="outline">Ultra</span><br>Creamy',
                 bottleSrc: 'assets/bottles/bottle-latte-classic.png',
-                modelSrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb',
+                models: [
+                    'assets/models/coffee-bean.glb',
+                    'assets/models/ice-cube.glb'
+                ],
                 colors: { inner: '#94602a', mid: '#4d2e11', outer: '#1a0e05' },
                 accent: '#ffcf87'
             },
@@ -867,7 +874,10 @@
                 desc: 'Double shot of dark-roasted Arabica crafted for relentless minds. High caffeine, raw palm sugar, and untamed tiger energy.',
                 sideTitle: '<span class="outline">Fiercely</span><br>Bold',
                 bottleSrc: 'assets/bottles/bottle-latte-strong.png',
-                modelSrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb',
+                models: [
+                    'assets/models/coffee-bean.glb',
+                    'assets/models/palm-sugar.glb'
+                ],
                 colors: { inner: '#a84b12', mid: '#401905', outer: '#120601' },
                 accent: '#ffaa33'
             }
@@ -985,9 +995,9 @@
                 );
             }
 
-            // 3. Floating Berries Implode -> Model Swap -> Explode Out
+            // 3. Floating Thematic Elements Implode -> Model Swap -> Explode Out
             let completedBerries = 0;
-            berries.forEach((berry) => {
+            berries.forEach((berry, idx) => {
                 const bW = berry.offsetWidth / 2;
                 const bH = berry.offsetHeight / 2;
                 const centerX = (window.innerWidth / 2 - berry.offsetLeft - bW);
@@ -1017,7 +1027,8 @@
                     duration: 0.5,
                     ease: "power2.in",
                     onComplete: () => {
-                        berry.src = config.modelSrc;
+                        const models = config.models;
+                        berry.src = models[idx % models.length];
                         heroCenter.style.zIndex = 50;
                     }
                 })
