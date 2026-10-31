@@ -1,0 +1,5 @@
+# robots.txt for ARN Coffee (arncoffee.com)
+User-agent: *
+Allow: /
+
+Sitemap: https://arncoffee.com/sitemap.xml
