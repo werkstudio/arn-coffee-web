@@ -13,3 +13,9 @@ wrangler.toml
 wrangler.json
 wrangler.jsonc
 .assetsignore
+.env*
+*.bak
+*.tmp
+*.py
+.DS_Store
+Thumbs.db

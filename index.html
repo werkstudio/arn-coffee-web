@@ -12,11 +12,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Galada&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
     
-    <!-- GSAP CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP (Self-hosted vendor) -->
+    <script src="assets/vendor/gsap.min.js"></script>
     
-    <!-- Google Model Viewer CDN -->
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <!-- Google Model Viewer (Self-hosted vendor) -->
+    <script type="module" src="assets/vendor/model-viewer.min.js"></script>
 
     <style>
         /* Hallmark · built: the project · redesign: polish · genre: atmospheric · v2.0.0 */
@@ -1874,10 +1874,10 @@
         <div class="hero-content">
             <!-- 3a. Floating Leaves (Far Background) -->
             <div class="leaves-container">
-                <model-viewer class="leaf l1" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 75deg 105%"></model-viewer>
-                <model-viewer class="leaf l2" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-30deg 60deg 105%"></model-viewer>
-                <model-viewer class="leaf l3" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="120deg 85deg 105%"></model-viewer>
-                <model-viewer class="leaf l4" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="10deg 45deg 105%"></model-viewer>
+                <model-viewer class="leaf l1" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 75deg 105%"></model-viewer>
+                <model-viewer class="leaf l2" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-30deg 60deg 105%"></model-viewer>
+                <model-viewer class="leaf l3" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="120deg 85deg 105%"></model-viewer>
+                <model-viewer class="leaf l4" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="10deg 45deg 105%"></model-viewer>
             </div>
 
             <!-- 3b. Left Column -->
@@ -1910,9 +1910,9 @@
 
             <!-- 3c. Background Berries (Behind Can) -->
             <div class="berries-container-bg">
-                <model-viewer class="berry b7" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
-                <model-viewer class="berry b8" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
-                <model-viewer class="berry b9" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
+                <model-viewer class="berry b7" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
+                <model-viewer class="berry b8" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
+                <model-viewer class="berry b9" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
             </div>
 
             <!-- 3d. Center Product (2.5D Interactive Bottle) -->
@@ -1936,12 +1936,12 @@
 
             <!-- 3e. Foreground Berries (Above Text and Can) -->
             <div class="berries-container">
-                <model-viewer class="berry b1" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
-                <model-viewer class="berry b2" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
-                <model-viewer class="berry b3" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%"></model-viewer>
-                <model-viewer class="berry b4" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%"></model-viewer>
-                <model-viewer class="berry b5" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%"></model-viewer>
-                <model-viewer class="berry b6" tabindex="-1" aria-hidden="true" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
+                <model-viewer class="berry b1" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
+                <model-viewer class="berry b2" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
+                <model-viewer class="berry b3" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%"></model-viewer>
+                <model-viewer class="berry b4" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%"></model-viewer>
+                <model-viewer class="berry b5" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%"></model-viewer>
+                <model-viewer class="berry b6" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
             </div>
 
             <!-- 3f. Right Column (Flavor Carousel + Side Title) -->
@@ -2164,7 +2164,7 @@
                 sideTitle: '<span class="outline">Wildly</span><br>Electric',
                 bottleSrc: 'assets/bottles/bottle-berry-americano.webp',
                 models: [
-                    'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+                    'assets/models/cherry.glb'
                 ],
                 colors: { inner: '#801625', mid: '#420b13', outer: '#160407' },
                 accent: '#ff5376'
@@ -2873,7 +2873,7 @@ Alamat Pengiriman:
             if (bubblesContainer.childElementCount >= 16) return;
 
             const bubble = document.createElement('img');
-            bubble.src = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/bubble.png';
+            bubble.src = 'assets/textures/bubble.png';
             bubble.className = 'bubble-img';
             bubble.decoding = 'async';
             const size = Math.random() * 20 + 10 + 'px';
