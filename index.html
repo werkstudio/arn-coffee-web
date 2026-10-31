@@ -141,16 +141,16 @@
     }
     </script>
     
-    <!-- Preconnect Fonts -->
+    <!-- Preload Critical LCP Bottle Image -->
+    <link rel="preload" as="image" href="assets/bottles/bottle-berry-americano.webp" type="image/webp" fetchpriority="high">
+
+    <!-- Preconnect & Asynchronous Non-Blocking Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Galada&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
-    <!-- GSAP (Self-hosted vendor) -->
-    <script src="assets/vendor/gsap.min.js"></script>
-    
-    <!-- Google Model Viewer (Self-hosted vendor) -->
-    <script type="module" src="assets/vendor/model-viewer.min.js"></script>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Galada&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Galada&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap">
+    </noscript>
 
     <style>
         /* Hallmark · built: the project · redesign: polish · genre: atmospheric · v2.0.0 */
@@ -161,9 +161,9 @@
             --accent-color: #ff5376;
             --card-accent: #ff5376;
             --muted-color: rgba(251, 245, 246, 0.72);
-            --font-main: 'Inter', sans-serif;
-            --font-heading: 'Galada', cursive;
-            --font-nav: 'Manrope', sans-serif;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-heading: 'Galada', cursive, serif;
+            --font-nav: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
             /* Grounded Tokens (tinted away from pure absolute white/black) */
             --color-paper: #0d0406;
@@ -1923,7 +1923,7 @@
     <header class="header">
         <a href="#" class="logo" aria-label="ARN Coffee Home">
             <div class="logo-icon">
-                <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img">
+                <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img" width="128" height="128">
             </div>
             <span>ARN Coffee</span>
         </a>
@@ -1953,7 +1953,7 @@
         <div class="mobile-nav-header">
             <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <div class="logo-icon" style="width: 28px; height: 28px; border-radius: 7px;">
-                    <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img" style="width: 20px; height: 20px;">
+                    <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img" width="128" height="128" style="width: 20px; height: 20px;">
                 </div>
                 <span class="mobile-nav-title">Menu & Order</span>
             </div>
@@ -2008,10 +2008,10 @@
         <div class="hero-content">
             <!-- 3a. Floating Leaves (Far Background) -->
             <div class="leaves-container">
-                <model-viewer class="leaf l1" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 75deg 105%"></model-viewer>
-                <model-viewer class="leaf l2" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-30deg 60deg 105%"></model-viewer>
-                <model-viewer class="leaf l3" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="120deg 85deg 105%"></model-viewer>
-                <model-viewer class="leaf l4" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="10deg 45deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="leaf l1" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 75deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="leaf l2" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-30deg 60deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="leaf l3" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="120deg 85deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="leaf l4" tabindex="-1" aria-hidden="true" src="assets/models/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="10deg 45deg 105%"></model-viewer>
             </div>
 
             <!-- 3b. Left Column -->
@@ -2044,9 +2044,9 @@
 
             <!-- 3c. Background Berries (Behind Can) -->
             <div class="berries-container-bg">
-                <model-viewer class="berry b7" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
-                <model-viewer class="berry b8" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
-                <model-viewer class="berry b9" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b7" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b8" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b9" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
             </div>
 
             <!-- 3d. Center Product (2.5D Interactive Bottle) -->
@@ -2054,13 +2054,13 @@
                 <div class="bottle-stage">
                     <div class="bottle-card-3d" id="bottle-container">
                         <div class="bottle-layer active" data-flavor="berry">
-                            <img class="bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="ARN Coffee Berry Americano" fetchpriority="high">
+                            <img class="bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="ARN Coffee Berry Americano" width="943" height="1816" fetchpriority="high">
                         </div>
                         <div class="bottle-layer" data-flavor="classic">
-                            <img class="bottle-img" src="assets/bottles/bottle-latte-classic.webp" alt="ARN Coffee Aren Latte Classic" fetchpriority="low" loading="lazy">
+                            <img class="bottle-img" src="assets/bottles/bottle-latte-classic.webp" alt="ARN Coffee Aren Latte Classic" width="943" height="1816" fetchpriority="low" loading="lazy">
                         </div>
                         <div class="bottle-layer" data-flavor="strong">
-                            <img class="bottle-img" src="assets/bottles/bottle-latte-strong.webp" alt="ARN Coffee Aren Latte Strong" fetchpriority="low" loading="lazy">
+                            <img class="bottle-img" src="assets/bottles/bottle-latte-strong.webp" alt="ARN Coffee Aren Latte Strong" width="943" height="1816" fetchpriority="low" loading="lazy">
                         </div>
                         <div class="bottle-glare" id="bottle-glare"></div>
                     </div>
@@ -2070,12 +2070,12 @@
 
             <!-- 3e. Foreground Berries (Above Text and Can) -->
             <div class="berries-container">
-                <model-viewer class="berry b1" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
-                <model-viewer class="berry b2" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
-                <model-viewer class="berry b3" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%"></model-viewer>
-                <model-viewer class="berry b4" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%"></model-viewer>
-                <model-viewer class="berry b5" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%"></model-viewer>
-                <model-viewer class="berry b6" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b1" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b2" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b3" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b4" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b5" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%"></model-viewer>
+                <model-viewer loading="lazy" class="berry b6" tabindex="-1" aria-hidden="true" src="assets/models/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
             </div>
 
             <!-- 3f. Right Column (Flavor Carousel + Side Title) -->
@@ -2083,21 +2083,21 @@
                 <div class="product-carousel">
                     <div class="carousel-cards">
                         <div class="card active" data-flavor="berry">
-                            <img src="assets/cards/card-berry-americano.webp" alt="Berry Americano">
+                            <img src="assets/cards/card-berry-americano.webp" alt="Berry Americano" width="512" height="512">
                             <div class="card-info">
                                 <span>Berry Americano</span>
                                 <span>Rp 18.000 · 200ml</span>
                             </div>
                         </div>
                         <div class="card" data-flavor="classic">
-                            <img src="assets/cards/card-latte-classic.webp" alt="Aren Latte Classic" loading="lazy">
+                            <img src="assets/cards/card-latte-classic.webp" alt="Aren Latte Classic" width="512" height="512" loading="lazy">
                             <div class="card-info">
                                 <span>Aren Classic</span>
                                 <span>Rp 18.000 · 200ml</span>
                             </div>
                         </div>
                         <div class="card" data-flavor="strong">
-                            <img src="assets/cards/card-latte-strong.webp" alt="Aren Latte Strong" loading="lazy">
+                            <img src="assets/cards/card-latte-strong.webp" alt="Aren Latte Strong" width="512" height="512" loading="lazy">
                             <div class="card-info">
                                 <span>Aren Strong</span>
                                 <span>Rp 18.000 · 200ml</span>
@@ -2146,7 +2146,7 @@
             <div class="modal-body">
                 <div class="modal-flavor-preview">
                     <div class="modal-bottle-thumb">
-                        <img id="order-bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="Varian Botol">
+                        <img id="order-bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="Varian Botol" width="943" height="1816" loading="lazy">
                     </div>
                     <div class="modal-flavor-details">
                         <h4 id="order-flavor-name">Berry Americano</h4>
@@ -2262,7 +2262,24 @@
         </filter>
     </svg>
 
-    <!-- 5. Interactive Motion & Choreography Script -->
+    <!-- 5. Vendor Scripts (Non-blocking) -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script>
+        // Load Google Model Viewer dynamically during idle time so it never blocks FCP / LCP
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                import('./assets/vendor/model-viewer.min.js');
+            }, { timeout: 1500 });
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    import('./assets/vendor/model-viewer.min.js');
+                }, 200);
+            });
+        }
+    </script>
+
+    <!-- 6. Interactive Motion & Choreography Script -->
     <script>
         const bottleStage = document.querySelector('.bottle-stage');
         const bottleContainer = document.getElementById('bottle-container');
