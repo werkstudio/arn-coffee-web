@@ -222,8 +222,9 @@
 
         .nav {
             display: flex;
-            gap: 0.4rem;
-            padding: 0.4rem;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.5rem;
             border-radius: 100px;
             position: relative;
             background: var(--color-glass-surface);
@@ -237,19 +238,38 @@
             font-family: var(--font-nav);
             color: var(--muted-color);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: 500;
-            padding: 0.5rem 1.25rem;
+            padding: 0.48rem 1.15rem;
             border-radius: 100px;
-            transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
             white-space: nowrap;
         }
 
-        .nav-item:hover,
+        .nav-item:hover {
+            color: var(--color-ink);
+            background: var(--color-glass-surface-hover);
+        }
+
         .nav-item.active {
             background: var(--accent-color);
             color: var(--color-dark-ink);
             font-weight: 600;
+        }
+
+        .nav-separator {
+            width: 1px;
+            height: 18px;
+            background: var(--color-glass-border);
+            margin: 0 0.2rem;
+            opacity: 0.7;
+        }
+
+        .nav-story-btn {
+            color: var(--color-ink-muted);
         }
 
         .header-actions {
@@ -263,12 +283,14 @@
             background: var(--color-btn-dark);
             color: var(--color-ink);
             border: 1px solid var(--color-glass-border);
-            padding: 0.85rem 1.8rem;
+            padding: 0.75rem 1.6rem;
             border-radius: 100px;
             font-weight: 600;
             font-size: 0.85rem;
             font-family: var(--font-nav);
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
             transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -411,32 +433,135 @@
             border-color: var(--accent-color);
         }
 
+        .mobile-nav-section-title {
+            font-family: var(--font-nav);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-ink-dim);
+            margin: 0.6rem 0 0.35rem 0.5rem;
+            font-weight: 600;
+        }
+
         .mobile-nav-links {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: auto;
+            gap: 0.45rem;
         }
 
         .mobile-nav-item {
             font-family: var(--font-nav);
             color: var(--muted-color);
             text-decoration: none;
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 500;
-            padding: 0.85rem 1rem;
+            padding: 0.8rem 1rem;
             border-radius: 14px;
-            transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            text-align: left;
         }
 
-        .mobile-nav-item:hover,
-        .mobile-nav-item.active {
+        .mobile-nav-item:hover {
             background: var(--color-glass-surface);
+            color: var(--color-ink);
+            transform: translateX(4px);
+        }
+
+        .mobile-nav-item.active {
+            background: var(--color-accent-glow);
+            border-color: var(--accent-color);
             color: var(--accent-color);
             font-weight: 600;
-            transform: translateX(4px);
+        }
+
+        .mobile-item-title {
+            font-weight: inherit;
+        }
+
+        .mobile-item-price {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            background: var(--color-glass-surface);
+            color: var(--color-ink-muted);
+            border: 1px solid var(--color-glass-border-subtle);
+        }
+
+        .mobile-nav-item.active .mobile-item-price {
+            background: var(--accent-color);
+            color: var(--color-dark-ink);
+            font-weight: 700;
+            border-color: var(--accent-color);
+        }
+
+        .mobile-story-item {
+            margin-bottom: auto;
+            border: 1px solid var(--color-glass-border-subtle);
+            background: var(--color-glass-surface);
+            color: var(--color-ink);
+        }
+
+        .mobile-drawer-footer {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-glass-border-subtle);
+        }
+
+        .mobile-wa-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 0.95rem;
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--color-ink);
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .mobile-wa-card:hover {
+            background: var(--color-glass-surface-hover);
+            border-color: var(--accent-color);
+        }
+
+        .mobile-wa-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #25d366;
+            color: #05160c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .mobile-wa-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-wa-label {
+            font-size: 0.7rem;
+            color: var(--color-ink-dim);
+            font-weight: 500;
+        }
+
+        .mobile-wa-num {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--color-ink);
         }
 
         .mobile-drawer-btn {
@@ -603,6 +728,17 @@
             gap: 1rem;
             margin-top: auto;
             padding-top: 1rem;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .award-badge:hover {
+            transform: translateX(3px);
+        }
+
+        .award-badge:hover .award-icon {
+            border-color: var(--accent-color);
+            background: var(--color-glass-surface-hover);
         }
 
         .mobile-award-badge {
@@ -1300,6 +1436,348 @@
                 height: 280px;
             }
         }
+
+        /* 4. Hallmark Modals (Order & Story) */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 3, 5, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--color-drawer-bg);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 24px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 40px var(--color-accent-glow);
+            padding: 1.75rem;
+            position: relative;
+            transform: translateY(18px) scale(0.97);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+        }
+
+        .modal-overlay.open .modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            border-bottom: 1px solid var(--color-glass-border-subtle);
+            padding-bottom: 0.9rem;
+        }
+
+        .modal-header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .modal-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-color);
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.65rem;
+            color: var(--color-ink);
+            line-height: 1.15;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-close-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border);
+            color: var(--color-ink);
+            font-size: 1.35rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--color-glass-surface-hover);
+            border-color: var(--accent-color);
+        }
+
+        .modal-flavor-preview {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            padding: 0.95rem 1.1rem;
+            border-radius: 16px;
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border-subtle);
+        }
+
+        .modal-bottle-thumb {
+            width: 56px;
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal-bottle-thumb img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .modal-flavor-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .modal-flavor-details h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-ink);
+        }
+
+        .modal-flavor-details p {
+            font-size: 0.8rem;
+            color: var(--color-ink-muted);
+            line-height: 1.35;
+        }
+
+        .modal-flavor-price {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: 0.15rem;
+        }
+
+        .order-flavor-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .order-field-label {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--color-ink-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .flavor-chips {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+        }
+
+        .flavor-chip {
+            padding: 0.45rem 0.85rem;
+            border-radius: 100px;
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border-subtle);
+            color: var(--color-ink-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            font-family: var(--font-nav);
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .flavor-chip:hover {
+            background: var(--color-glass-surface-hover);
+            color: var(--color-ink);
+        }
+
+        .flavor-chip.active {
+            background: var(--accent-color);
+            color: var(--color-dark-ink);
+            border-color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .order-quantity-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.2rem 0;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border-subtle);
+            border-radius: 100px;
+            padding: 0.25rem 0.6rem;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-glass-surface-hover);
+            color: var(--color-ink);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .qty-btn:hover {
+            background: var(--accent-color);
+            color: var(--color-dark-ink);
+        }
+
+        .qty-display {
+            min-width: 26px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-ink);
+        }
+
+        .order-summary-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--color-glass-border-subtle);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.88rem;
+            color: var(--color-ink-muted);
+        }
+
+        .summary-total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-ink);
+        }
+
+        .summary-note {
+            font-size: 0.74rem;
+            color: var(--color-ink-dim);
+            line-height: 1.35;
+        }
+
+        .order-wa-submit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            width: 100%;
+            padding: 0.95rem 1.25rem;
+            border-radius: 100px;
+            background: #25d366;
+            color: #05160c;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: var(--font-nav);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .order-wa-submit-btn:hover {
+            background: #20ba59;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+        }
+
+        .story-modal {
+            max-width: 520px;
+        }
+
+        .story-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 0.35rem;
+        }
+
+        .story-pillar {
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+            padding: 0.9rem 1rem;
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border-subtle);
+            border-radius: 16px;
+        }
+
+        .pillar-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--color-accent-glow);
+            border: 1px solid var(--color-accent-dim);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .pillar-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-bottom: 0.25rem;
+        }
+
+        .pillar-content p {
+            font-size: 0.81rem;
+            color: var(--color-ink-muted);
+            line-height: 1.45;
+        }
     </style>
 </head>
 
@@ -1309,21 +1787,24 @@
 
     <!-- 2. Header (Glass Nav) -->
     <header class="header">
-        <a href="#" class="logo">
+        <a href="#" class="logo" aria-label="ARN Coffee Home">
             <div class="logo-icon">
                 <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img">
             </div>
             <span>ARN Coffee</span>
         </a>
-        <nav class="nav glass">
-            <a href="#" class="nav-item active">Home</a>
-            <a href="#" class="nav-item">Menu</a>
-            <a href="#" class="nav-item">Origin</a>
-            <a href="#" class="nav-item">Craft</a>
-            <a href="#" class="nav-item">Reviews</a>
+        <nav class="nav glass" aria-label="Variant Navigation">
+            <button type="button" class="nav-item active" data-flavor="berry">Berry Americano</button>
+            <button type="button" class="nav-item" data-flavor="classic">Aren Classic</button>
+            <button type="button" class="nav-item" data-flavor="strong">Aren Strong</button>
+            <span class="nav-separator" aria-hidden="true"></span>
+            <button type="button" class="nav-item nav-story-btn" id="open-story-btn">Story & Specs</button>
         </nav>
         <div class="header-actions">
-            <button class="contact-btn desktop-order-btn">Order Now</button>
+            <button type="button" class="contact-btn desktop-order-btn" id="header-order-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 6px; vertical-align: -2px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                Order WhatsApp
+            </button>
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
@@ -1340,18 +1821,52 @@
                 <div class="logo-icon" style="width: 28px; height: 28px; border-radius: 7px;">
                     <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img" style="width: 20px; height: 20px;">
                 </div>
-                <span class="mobile-nav-title">Menu</span>
+                <span class="mobile-nav-title">Menu & Order</span>
             </div>
             <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&times;</button>
         </div>
-        <nav class="mobile-nav-links">
-            <a href="#" class="mobile-nav-item active">Home</a>
-            <a href="#" class="mobile-nav-item">Menu</a>
-            <a href="#" class="mobile-nav-item">Origin</a>
-            <a href="#" class="mobile-nav-item">Craft</a>
-            <a href="#" class="mobile-nav-item">Reviews</a>
+        
+        <div class="mobile-nav-section-title">PILIH VARIAN BOTOL (200ml · Rp 18.000)</div>
+        <nav class="mobile-nav-links" aria-label="Varian Rasa">
+            <button type="button" class="mobile-nav-item active" data-flavor="berry">
+                <span class="mobile-item-title">Berry Americano</span>
+                <span class="mobile-item-price">Rp 18.000</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-flavor="classic">
+                <span class="mobile-item-title">Aren Latte Classic</span>
+                <span class="mobile-item-price">Rp 18.000</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-flavor="strong">
+                <span class="mobile-item-title">Aren Latte Strong</span>
+                <span class="mobile-item-price">Rp 18.000</span>
+            </button>
         </nav>
-        <button class="mobile-drawer-btn">Order Now</button>
+
+        <div class="mobile-nav-section-title" style="margin-top: 1.1rem;">TENTANG RACIKAN & LOKASI</div>
+        <button type="button" class="mobile-nav-item mobile-story-item" id="mobile-open-story-btn">
+            <span class="mobile-item-title">Story, Bahan & Jam Buka</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <div class="mobile-drawer-footer">
+            <div class="mobile-loc-card" style="padding: 0.65rem 0.9rem; background: var(--color-glass-surface); border: 1px solid var(--color-glass-border-subtle); border-radius: 12px; font-size: 0.75rem; color: var(--color-ink-muted); line-height: 1.4;">
+                <div style="font-weight: 600; color: var(--color-ink); display: flex; align-items: center; gap: 4px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Bandung City
+                </div>
+                <div>Sen - Sab: 08:00 - 17:00 WIB</div>
+            </div>
+            <a href="https://wa.me/6285863002824" target="_blank" rel="noopener noreferrer" class="mobile-wa-card" aria-label="WhatsApp ARN Coffee">
+                <div class="mobile-wa-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                </div>
+                <div class="mobile-wa-text">
+                    <span class="mobile-wa-label">WhatsApp Order</span>
+                    <span class="mobile-wa-num">+62 858-6300-2824</span>
+                </div>
+            </a>
+            <button type="button" class="mobile-drawer-btn" id="mobile-order-btn">Pesan Sekarang</button>
+        </div>
     </aside>
 
     <!-- 3. Hero Main Section -->
@@ -1380,15 +1895,15 @@
                         <span class="plus-icon">+</span>
                     </button>
                 </div>
-                <div class="award-badge desktop-award-badge">
+                <div class="award-badge desktop-award-badge" id="desktop-story-badge" role="button" tabindex="0" aria-label="Lihat keaslian racikan ARN Coffee" title="Klik untuk lihat detail racikan & lokasi">
                     <div class="award-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
                         </svg>
                     </div>
                     <div class="award-text">
-                        <span class="award-title">Specialty Roast Awards</span>
-                        <span class="award-subtitle">Indonesia Best Artisan Brew 2025</span>
+                        <span class="award-title">Signature Houseblend · 100% Organic</span>
+                        <span class="award-subtitle">Bandung City · Rp 18.000 (200ml)</span>
                     </div>
                 </div>
             </div>
@@ -1437,21 +1952,21 @@
                             <img src="assets/cards/card-berry-americano.webp" alt="Berry Americano">
                             <div class="card-info">
                                 <span>Berry Americano</span>
-                                <span>Rp 28.000</span>
+                                <span>Rp 18.000 · 200ml</span>
                             </div>
                         </div>
                         <div class="card" data-flavor="classic">
                             <img src="assets/cards/card-latte-classic.webp" alt="Aren Latte Classic" loading="lazy">
                             <div class="card-info">
                                 <span>Aren Classic</span>
-                                <span>Rp 28.000</span>
+                                <span>Rp 18.000 · 200ml</span>
                             </div>
                         </div>
                         <div class="card" data-flavor="strong">
                             <img src="assets/cards/card-latte-strong.webp" alt="Aren Latte Strong" loading="lazy">
                             <div class="card-info">
                                 <span>Aren Strong</span>
-                                <span>Rp 30.000</span>
+                                <span>Rp 18.000 · 200ml</span>
                             </div>
                         </div>
                     </div>
@@ -1464,15 +1979,15 @@
                         </button>
                     </div>
                 </div>
-                <div class="award-badge mobile-award-badge">
+                <div class="award-badge mobile-award-badge" id="mobile-story-badge" role="button" tabindex="0" aria-label="Lihat keaslian racikan ARN Coffee" title="Klik untuk lihat detail racikan & lokasi">
                     <div class="award-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
                         </svg>
                     </div>
                     <div class="award-text">
-                        <span class="award-title">Specialty Roast Awards</span>
-                        <span class="award-subtitle">Indonesia Best Artisan Brew 2025</span>
+                        <span class="award-title">Signature Houseblend · 100% Organic</span>
+                        <span class="award-subtitle">Bandung City · Rp 18.000 (200ml)</span>
                     </div>
                 </div>
                 <h2 class="side-title" id="hero-side-title">
@@ -1482,6 +1997,128 @@
             </div>
         </div>
     </main>
+
+    <!-- Order Modal -->
+    <div class="modal-overlay" id="order-modal-overlay" aria-hidden="true">
+        <div class="modal-container glass-modal" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+            <div class="modal-header">
+                <div class="modal-header-text">
+                    <span class="modal-badge">Cold-Crafted & Fresh · 200ml</span>
+                    <h3 class="modal-title" id="order-modal-title">Pesan ARN Coffee</h3>
+                </div>
+                <button type="button" class="modal-close-btn" id="order-modal-close" aria-label="Tutup modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-flavor-preview">
+                    <div class="modal-bottle-thumb">
+                        <img id="order-bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="Varian Botol">
+                    </div>
+                    <div class="modal-flavor-details">
+                        <h4 id="order-flavor-name">Berry Americano</h4>
+                        <p id="order-flavor-desc">Signature Houseblend organic espresso + 100% real berry juice (200ml).</p>
+                        <span class="modal-flavor-price" id="order-flavor-price">Rp 18.000 / botol (200ml)</span>
+                    </div>
+                </div>
+
+                <div class="order-flavor-selector">
+                    <label class="order-field-label">Pilih Varian Rasa:</label>
+                    <div class="flavor-chips">
+                        <button type="button" class="flavor-chip active" data-flavor="berry">Berry Americano</button>
+                        <button type="button" class="flavor-chip" data-flavor="classic">Aren Classic</button>
+                        <button type="button" class="flavor-chip" data-flavor="strong">Aren Strong</button>
+                    </div>
+                </div>
+
+                <div class="order-quantity-row">
+                    <span class="order-field-label">Jumlah Botol:</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" id="qty-minus" aria-label="Kurangi jumlah">−</button>
+                        <span class="qty-display" id="qty-value">1</span>
+                        <button type="button" class="qty-btn" id="qty-plus" aria-label="Tambah jumlah">+</button>
+                    </div>
+                </div>
+
+                <div class="order-summary-box">
+                    <div class="summary-line">
+                        <span>Estimasi Total:</span>
+                        <span class="summary-total" id="order-total-price">Rp 18.000</span>
+                    </div>
+                    <p class="summary-note">❄️ Botol 200ml cold storage · Dikirim dari Roastery Mandalajati, Kota Bandung (Sen - Sab, 08:00 - 17:00 WIB).</p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="https://wa.me/6285863002824" class="order-wa-submit-btn" id="order-wa-submit" target="_blank" rel="noopener noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Pesan via WhatsApp (+62 858-6300-2824)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story & Craft Modal -->
+    <div class="modal-overlay" id="story-modal-overlay" aria-hidden="true">
+        <div class="modal-container glass-modal story-modal" role="dialog" aria-modal="true" aria-labelledby="story-modal-title">
+            <div class="modal-header">
+                <div class="modal-header-text">
+                    <span class="modal-badge">Craft & Authenticity</span>
+                    <h3 class="modal-title" id="story-modal-title">The Craft & Real Aren</h3>
+                </div>
+                <button type="button" class="modal-close-btn" id="story-modal-close" aria-label="Tutup modal">&times;</button>
+            </div>
+
+            <div class="modal-body story-body">
+                <div class="story-pillar">
+                    <div class="pillar-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>Signature Houseblend · 100% Organic</h4>
+                        <p>Biji kopi Signature Houseblend organik 100% dengan profil roasting artisan presisi. Menghasilkan ekstraksi espresso berkarakter pekat, bersih, dan berkafein tinggi tanpa residu kimia sintetis.</p>
+                    </div>
+                </div>
+
+                <div class="story-pillar">
+                    <div class="pillar-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>100% Pure Berry Juice & Real Aren</h4>
+                        <p>Varian Berry Americano dibuat dengan <strong>100% sari buah berry murni asli</strong> (tanpa perisa sintetik). Varian Aren Latte menggunakan 100% sari nira aren murni tanpa pemanis buatan atau sirup jagung.</p>
+                    </div>
+                </div>
+
+                <div class="story-pillar">
+                    <div class="pillar-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-7L10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path></svg>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>Cold Storage 200ml (All Varian Rp 18.000)</h4>
+                        <p>Dikemas praktis dalam botol kedap udara 200ml. Simpan selalu pada suhu dingin 4°C di lemari es, kocok perlahan sebelum diminum. Tahan 7 hari dalam kondisi dingin.</p>
+                    </div>
+                </div>
+
+                <div class="story-pillar">
+                    <div class="pillar-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>Roastery & Jam Operasional Bandung</h4>
+                        <p><strong>Alamat</strong>: Mega Regency No.Kav.42, Karang Pamulang, Mandalajati, Bandung City, West Java 40195.<br>
+                        <strong>Jam Buka</strong>: Senin – Sabtu, 08:00 – 17:00 WIB (Minggu Libur).<br>
+                        Melayani pengiriman instant/sameday cold storage area Bandung dan sekitarnya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="order-wa-submit-btn" id="story-to-order-btn">
+                    Pesan Varian Sekarang (Rp 18.000)
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- 4. Hidden SVG Filter -->
     <svg style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;" aria-hidden="true">
@@ -1518,8 +2155,12 @@
         const flavorConfigs = {
             berry: {
                 name: 'Berry Americano',
+                price: 'Rp 18.000',
+                priceNum: 18000,
+                volume: '200ml',
+                shortDesc: 'Signature Houseblend 100% organic espresso + 100% real berry juice (200ml).',
                 title: '<span class="outline">ZAP!</span><br>Berry Americano',
-                desc: 'Electric collision of bold espresso and wild tart berries: a crisp, fruity burst of pure caffeine energy, crafted in every single drop.',
+                desc: 'Electric collision of 100% organic signature houseblend espresso and 100% pure berry juice: a crisp, fruity burst of caffeine energy in every 200ml drop.',
                 sideTitle: '<span class="outline">Wildly</span><br>Electric',
                 bottleSrc: 'assets/bottles/bottle-berry-americano.webp',
                 models: [
@@ -1530,8 +2171,12 @@
             },
             classic: {
                 name: 'Aren Latte Classic',
+                price: 'Rp 18.000',
+                priceNum: 18000,
+                volume: '200ml',
+                shortDesc: 'Signature Houseblend organic espresso, susu creamy, dan 100% gula aren murni (200ml).',
                 title: '<span class="outline">Smooth</span><br>Aren Classic',
-                desc: 'Velvety fresh milk infused with authentic Indonesian gula aren and slow-dripped espresso. Unapologetically smooth, deeply comforting.',
+                desc: 'Velvety fresh milk infused with authentic Indonesian gula aren and slow-dripped organic signature houseblend. Unapologetically smooth in every 200ml bottle.',
                 sideTitle: '<span class="outline">Ultra</span><br>Creamy',
                 bottleSrc: 'assets/bottles/bottle-latte-classic.webp',
                 models: [
@@ -1543,8 +2188,12 @@
             },
             strong: {
                 name: 'Aren Latte Strong',
+                price: 'Rp 18.000',
+                priceNum: 18000,
+                volume: '200ml',
+                shortDesc: 'Double shot dark-roast organic houseblend, raw palm sugar, dan tiger energy (200ml).',
                 title: '<span class="outline">Double</span><br>Shot Roar',
-                desc: 'Double shot of dark-roasted Arabica crafted for relentless minds. High caffeine, raw palm sugar, and untamed tiger energy.',
+                desc: 'Double shot of dark-roasted 100% organic Arabica crafted for relentless minds. High caffeine, raw palm sugar, and untamed tiger energy in 200ml.',
                 sideTitle: '<span class="outline">Fiercely</span><br>Bold',
                 bottleSrc: 'assets/bottles/bottle-latte-strong.webp',
                 models: [
@@ -1582,14 +2231,169 @@
             setTimeout(prefetchIdle, 1200);
         }
 
-        // Mobile Drawer Navigation
+        // Element Selectors for Synchronized Navigation & Modals
+        const desktopNavFlavorItems = document.querySelectorAll('.nav .nav-item[data-flavor]');
+        const mobileNavFlavorItems = document.querySelectorAll('.mobile-nav-item[data-flavor]');
+        const flavorChips = document.querySelectorAll('.flavor-chip[data-flavor]');
         const menuToggle = document.getElementById('menu-toggle');
         const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
         const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-item');
-        const mobileDrawerBtn = document.querySelector('.mobile-drawer-btn');
         const mobileCloseBtn = document.getElementById('mobile-nav-close');
 
+        // Modals
+        const orderModalOverlay = document.getElementById('order-modal-overlay');
+        const storyModalOverlay = document.getElementById('story-modal-overlay');
+        const orderModalClose = document.getElementById('order-modal-close');
+        const storyModalClose = document.getElementById('story-modal-close');
+        const openStoryBtn = document.getElementById('open-story-btn');
+        const mobileOpenStoryBtn = document.getElementById('mobile-open-story-btn');
+        const desktopStoryBadge = document.getElementById('desktop-story-badge');
+        const mobileStoryBadge = document.getElementById('mobile-story-badge');
+        const storyToOrderBtn = document.getElementById('story-to-order-btn');
+        const headerOrderBtn = document.getElementById('header-order-btn');
+        const mobileOrderBtn = document.getElementById('mobile-order-btn');
+        const heroShopBtn = document.querySelector('.primary-btn');
+
+        // Order Modal Form Controls
+        const orderBottleImg = document.getElementById('order-bottle-img');
+        const orderFlavorName = document.getElementById('order-flavor-name');
+        const orderFlavorDesc = document.getElementById('order-flavor-desc');
+        const orderFlavorPrice = document.getElementById('order-flavor-price');
+        const orderTotalPrice = document.getElementById('order-total-price');
+        const orderWaSubmit = document.getElementById('order-wa-submit');
+        const qtyMinus = document.getElementById('qty-minus');
+        const qtyPlus = document.getElementById('qty-plus');
+        const qtyValue = document.getElementById('qty-value');
+
+        let orderQuantity = 1;
+        const WA_PHONE_NUMBER = '6285863002824';
+
+        function updateOrderSummary() {
+            const currentFlavor = flavors[activeFlavorIndex];
+            const cfg = flavorConfigs[currentFlavor];
+            if (!cfg) return;
+
+            if (orderBottleImg) orderBottleImg.src = cfg.bottleSrc;
+            if (orderFlavorName) orderFlavorName.textContent = cfg.name;
+            if (orderFlavorDesc) orderFlavorDesc.textContent = cfg.shortDesc;
+            if (orderFlavorPrice) orderFlavorPrice.textContent = `${cfg.price} / botol`;
+            if (qtyValue) qtyValue.textContent = orderQuantity;
+
+            const totalNum = cfg.priceNum * orderQuantity;
+            const totalFormatted = `Rp ${totalNum.toLocaleString('id-ID')}`;
+            if (orderTotalPrice) orderTotalPrice.textContent = totalFormatted;
+
+            const message = `Halo ARN Coffee Bandung, saya ingin memesan:
+• ${orderQuantity}x ${cfg.name} (200ml @ ${cfg.price})
+Estimasi Total: ${totalFormatted}
+
+Alamat Pengiriman: 
+(Mohon info ketersediaan stok & ongkir dari Roastery Mandalajati Bandung. Terima kasih!)`;
+
+            if (orderWaSubmit) {
+                orderWaSubmit.href = `https://wa.me/${WA_PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            }
+        }
+
+        // Initialize Order Summary Data Immediately
+        updateOrderSummary();
+
+        function openModal(modal) {
+            if (!modal) return;
+            toggleMobileMenu(false);
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden', 'false');
+            updateOrderSummary();
+            const firstInteractive = modal.querySelector('button, a, input');
+            if (firstInteractive) firstInteractive.focus();
+        }
+
+        function closeModal(modal) {
+            if (!modal) return;
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function closeAllModals() {
+            closeModal(orderModalOverlay);
+            closeModal(storyModalOverlay);
+        }
+
+        // Modal Triggers
+        if (headerOrderBtn) headerOrderBtn.addEventListener('click', () => openModal(orderModalOverlay));
+        if (mobileOrderBtn) mobileOrderBtn.addEventListener('click', () => openModal(orderModalOverlay));
+        if (heroShopBtn) heroShopBtn.addEventListener('click', () => openModal(orderModalOverlay));
+        if (storyToOrderBtn) {
+            storyToOrderBtn.addEventListener('click', () => {
+                closeModal(storyModalOverlay);
+                openModal(orderModalOverlay);
+            });
+        }
+
+        if (openStoryBtn) openStoryBtn.addEventListener('click', () => openModal(storyModalOverlay));
+        if (mobileOpenStoryBtn) mobileOpenStoryBtn.addEventListener('click', () => openModal(storyModalOverlay));
+        if (desktopStoryBadge) {
+            desktopStoryBadge.addEventListener('click', () => openModal(storyModalOverlay));
+            desktopStoryBadge.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal(storyModalOverlay);
+                }
+            });
+        }
+        if (mobileStoryBadge) {
+            mobileStoryBadge.addEventListener('click', () => openModal(storyModalOverlay));
+            mobileStoryBadge.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal(storyModalOverlay);
+                }
+            });
+        }
+
+        if (orderModalClose) orderModalClose.addEventListener('click', () => closeModal(orderModalOverlay));
+        if (storyModalClose) storyModalClose.addEventListener('click', () => closeModal(storyModalOverlay));
+
+        [orderModalOverlay, storyModalOverlay].forEach(overlay => {
+            if (overlay) {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) closeModal(overlay);
+                });
+            }
+        });
+
+        // Quantity Stepper
+        if (qtyMinus) {
+            qtyMinus.addEventListener('click', () => {
+                if (orderQuantity > 1) {
+                    orderQuantity--;
+                    updateOrderSummary();
+                }
+            });
+        }
+        if (qtyPlus) {
+            qtyPlus.addEventListener('click', () => {
+                if (orderQuantity < 30) {
+                    orderQuantity++;
+                    updateOrderSummary();
+                }
+            });
+        }
+
+        // Flavor Chips inside Order Modal
+        flavorChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const targetFlavor = chip.dataset.flavor;
+                const targetIdx = flavors.indexOf(targetFlavor);
+                if (targetIdx !== -1) {
+                    activeFlavorIndex = targetIdx;
+                    syncActiveElements();
+                    if (!isSwitching) switchFlavor(targetFlavor);
+                }
+            });
+        });
+
+        // Mobile Drawer Navigation
         function toggleMobileMenu(forceState) {
             if (!mobileNavDrawer || !menuToggle) return;
             const isOpen = typeof forceState === 'boolean' ? forceState : !mobileNavDrawer.classList.contains('open');
@@ -1612,28 +2416,74 @@
         if (mobileCloseBtn) {
             mobileCloseBtn.addEventListener('click', () => toggleMobileMenu(false));
         }
-        if (mobileDrawerBtn) {
-            mobileDrawerBtn.addEventListener('click', () => toggleMobileMenu(false));
-        }
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNavLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                toggleMobileMenu(false);
-            });
-        });
+
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileNavDrawer && mobileNavDrawer.classList.contains('open')) {
-                toggleMobileMenu(false);
+            if (e.key === 'Escape') {
+                if (orderModalOverlay && orderModalOverlay.classList.contains('open')) {
+                    closeModal(orderModalOverlay);
+                } else if (storyModalOverlay && storyModalOverlay.classList.contains('open')) {
+                    closeModal(storyModalOverlay);
+                } else if (mobileNavDrawer && mobileNavDrawer.classList.contains('open')) {
+                    toggleMobileMenu(false);
+                }
             }
         });
 
-        // Card Click Handlers
+        // Synchronize Active States Across Desktop Nav, Mobile Drawer, Cards & Modal
+        function syncActiveElements() {
+            const currentFlavor = flavors[activeFlavorIndex];
+
+            desktopNavFlavorItems.forEach(item => {
+                item.classList.toggle('active', item.dataset.flavor === currentFlavor);
+            });
+
+            mobileNavFlavorItems.forEach(item => {
+                item.classList.toggle('active', item.dataset.flavor === currentFlavor);
+            });
+
+            cards.forEach((c, i) => {
+                c.classList.toggle('active', i === activeFlavorIndex);
+            });
+
+            flavorChips.forEach(chip => {
+                chip.classList.toggle('active', chip.dataset.flavor === currentFlavor);
+            });
+
+            updateOrderSummary();
+        }
+
+        // Desktop Nav Variant Click Handlers
+        desktopNavFlavorItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetFlavor = item.dataset.flavor;
+                const targetIndex = flavors.indexOf(targetFlavor);
+                if (targetIndex === -1 || isSwitching || activeFlavorIndex === targetIndex) return;
+                activeFlavorIndex = targetIndex;
+                syncActiveElements();
+                switchFlavor(targetFlavor);
+            });
+        });
+
+        // Mobile Nav Variant Click Handlers
+        mobileNavFlavorItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetFlavor = item.dataset.flavor;
+                const targetIndex = flavors.indexOf(targetFlavor);
+                if (targetIndex !== -1 && !isSwitching && activeFlavorIndex !== targetIndex) {
+                    activeFlavorIndex = targetIndex;
+                    syncActiveElements();
+                    switchFlavor(targetFlavor);
+                }
+                toggleMobileMenu(false);
+            });
+        });
+
+        // Carousel Card Click Handlers
         cards.forEach((card, idx) => {
             card.addEventListener('click', () => {
                 if (isSwitching || activeFlavorIndex === idx) return;
                 activeFlavorIndex = idx;
-                updateActiveCard();
+                syncActiveElements();
                 switchFlavor(card.dataset.flavor);
             });
         });
@@ -1642,22 +2492,16 @@
         prevBtn.addEventListener('click', () => {
             if (isSwitching) return;
             activeFlavorIndex = (activeFlavorIndex - 1 + flavors.length) % flavors.length;
-            updateActiveCard();
+            syncActiveElements();
             switchFlavor(flavors[activeFlavorIndex]);
         });
 
         nextBtn.addEventListener('click', () => {
             if (isSwitching) return;
             activeFlavorIndex = (activeFlavorIndex + 1) % flavors.length;
-            updateActiveCard();
+            syncActiveElements();
             switchFlavor(flavors[activeFlavorIndex]);
         });
-
-        function updateActiveCard() {
-            cards.forEach((c, i) => {
-                c.classList.toggle('active', i === activeFlavorIndex);
-            });
-        }
 
         // Choreographed Flavor Switch Animation
         async function switchFlavor(flavorKey) {
