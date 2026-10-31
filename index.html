@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARN Coffee | Bold Artisan Brews & Real Aren</title>
     <meta name="description" content="Experience the electric energy of ARN Coffee. Bold espresso, real gula aren, and wild berry americanos crafted with Indonesian passion.">
+    <link rel="icon" type="image/webp" href="assets/logo-tiger-transparent.webp">
     
     <!-- Preconnect Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,15 +44,24 @@
             user-select: none;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: radial-gradient(circle at center, var(--bg-inner) 0%, var(--bg-mid) 50%, var(--bg-outer) 100%);
             color: var(--text-color);
             font-family: var(--font-main);
-            overflow: hidden; /* Remove scroll */
+            overflow: hidden; /* Remove scroll on desktop */
             height: 100vh;
+            min-height: 100dvh;
             width: 100vw;
             position: relative;
             transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        button, .card, .nav-item, .mobile-nav-item, .logo {
+            touch-action: manipulation;
         }
 
         /* 1. Bubbles Container */
@@ -90,11 +100,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.8rem 4%;
+            padding: 1.6rem 4%;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
+            transition: padding 0.3s ease;
         }
 
         .logo {
@@ -107,23 +118,36 @@
             color: #ffffff;
             text-decoration: none;
             letter-spacing: 0.5px;
+            flex-shrink: 0;
         }
 
         .logo-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--accent-color);
-            transition: transform 0.3s ease, color 0.5s ease;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .logo-tiger-img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+            pointer-events: none;
+            user-select: none;
         }
 
         .logo:hover .logo-icon {
             transform: rotate(-10deg) scale(1.08);
+            border-color: var(--accent-color);
         }
 
         .nav {
@@ -132,7 +156,6 @@
             background: var(--glass-bg);
             padding: 0.4rem;
             border-radius: 100px;
-            border: 1px solid var(--glass-border);
             position: relative;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.18);
@@ -150,6 +173,7 @@
             padding: 0.5rem 1.25rem;
             border-radius: 100px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .nav-item:hover,
@@ -157,6 +181,13 @@
             background: var(--accent-color);
             color: #0b0204;
             font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
         }
 
         .contact-btn {
@@ -171,6 +202,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            white-space: nowrap;
         }
 
         .contact-btn:hover {
@@ -178,6 +211,179 @@
             transform: translateY(-2px);
             border-color: var(--accent-color);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 200;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: var(--accent-color);
+        }
+
+        .hamburger-bar {
+            width: 20px;
+            height: 2px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.open .hamburger-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .menu-toggle.open .hamburger-bar:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-8px);
+        }
+        .menu-toggle.open .hamburger-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile Nav Drawer */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .mobile-nav-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-nav-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(85vw, 320px);
+            height: 100%;
+            height: 100dvh;
+            background: rgba(18, 5, 8, 0.94);
+            border-left: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            z-index: 160;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.8rem 2.5rem;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .mobile-nav-drawer.open {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .mobile-nav-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-nav-close:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: var(--accent-color);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: auto;
+        }
+
+        .mobile-nav-item {
+            font-family: var(--font-nav);
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 500;
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-nav-item:hover,
+        .mobile-nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+            transform: translateX(4px);
+        }
+
+        .mobile-drawer-btn {
+            width: 100%;
+            padding: 0.95rem;
+            text-align: center;
+            background: var(--accent-color);
+            color: #0d0406;
+            border: none;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: var(--font-nav);
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 83, 118, 0.3);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .mobile-drawer-btn:active {
+            transform: scale(0.98);
         }
 
         /* 3. Main Hero Viewport */
@@ -322,6 +528,10 @@
             gap: 1rem;
             margin-top: auto;
             padding-top: 1rem;
+        }
+
+        .mobile-award-badge {
+            display: none;
         }
 
         .award-icon {
@@ -549,10 +759,16 @@
             text-align: center;
         }
 
-        .card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-4px);
+        @media (hover: hover) {
+            .card:hover {
+                background: rgba(255, 255, 255, 0.12);
+                border-color: rgba(255, 255, 255, 0.4);
+                transform: translateY(-4px);
+            }
+
+            .card:hover img {
+                transform: translateY(-24px) rotate(-10deg) scale(1.12) !important;
+            }
         }
 
         .card.active {
@@ -560,6 +776,10 @@
             border-width: 1.5px;
             background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 83, 118, 0.2);
+        }
+
+        .card.active img {
+            transform: translateY(-8px) scale(1.05);
         }
 
         .card img {
@@ -572,10 +792,6 @@
             display: block;
             will-change: transform;
             pointer-events: none;
-        }
-
-        .card:hover img {
-            transform: translateY(-24px) rotate(-10deg) scale(1.12) !important;
         }
 
         .card-info {
@@ -617,6 +833,7 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .nav-arrow:hover { 
@@ -630,33 +847,372 @@
             text-align: right; 
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 1200px) {
-            .main-product-3d { width: 100vw; height: 60vh; top: 40%; }
-            .hero-content { 
-                flex-direction: column; 
-                justify-content: center; 
-                align-items: center; 
-                padding-top: 6rem;
-                gap: 2rem;
+        /* ========================================================
+           Responsive Breakpoints (Tablet & Mobile Architecture)
+           ======================================================== */
+        
+        /* Tablet & Mobile Screens (<= 1024px) */
+        @media (max-width: 1024px) {
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
+                height: auto;
+                min-height: 100dvh;
             }
-            .hero-left { 
-                height: auto; 
-                align-items: center; 
-                text-align: center; 
-                padding: 0;
+
+            .hero {
+                height: auto;
+                min-height: 100dvh;
+                padding: 6rem 1.5rem 2.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                overflow-x: hidden;
             }
-            .description { max-width: 90%; }
-            .award-badge { display: none; }
-            .main-title, .side-title { font-size: clamp(3.5rem, 10vw, 5.5rem); }
-            .hero-right { 
-                height: auto; 
-                align-items: center; 
-                text-align: center; 
+
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1.25rem;
+                height: auto;
+                max-width: 640px;
+                margin: 0 auto;
                 width: 100%;
-                padding: 0;
             }
-            .side-title { align-self: center; text-align: center; display: none; }
+
+            .hero-left {
+                order: 1;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                padding: 0;
+                align-items: center;
+                text-align: center;
+                gap: 0.85rem;
+            }
+
+            .main-title {
+                font-size: clamp(2.4rem, 8vw, 4.2rem);
+                line-height: 0.98;
+                white-space: normal;
+                word-break: normal;
+                text-align: center;
+                text-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            }
+
+            .description {
+                font-size: 0.96rem;
+                line-height: 1.55;
+                max-width: 460px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .cta-group {
+                justify-content: center;
+                margin-top: 0.25rem;
+            }
+
+            .desktop-award-badge {
+                display: none !important;
+            }
+
+            .hero-center {
+                order: 2;
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: min(44vh, 390px);
+                margin: 0.5rem 0;
+                pointer-events: auto;
+                opacity: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .bottle-stage {
+                margin-top: 0;
+                touch-action: pan-y;
+                height: 100%;
+            }
+
+            .bottle-card-3d {
+                height: 100%;
+                aspect-ratio: 943 / 1816;
+            }
+
+            .bottle-shadow {
+                bottom: -16px;
+                width: 72%;
+                height: 28px;
+            }
+
+            .hero-right {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                padding: 0;
+                align-items: center;
+                text-align: center;
+                pointer-events: auto;
+            }
+
+            .side-title {
+                display: none;
+            }
+
+            .product-carousel {
+                align-items: center;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .carousel-cards {
+                width: 100%;
+                justify-content: center;
+                gap: 0.75rem;
+                padding-top: 2.2rem;
+            }
+
+            .card {
+                width: min(116px, 29vw);
+                padding: 0.75rem 0.45rem 0.8rem;
+                padding-top: 4.2rem;
+                border-radius: 20px;
+                gap: 0.85rem;
+            }
+
+            .card img {
+                width: 88px;
+                height: 120px;
+                margin-top: -5.8rem;
+            }
+
+            .card-info span:first-child {
+                font-size: 0.72rem;
+            }
+
+            .card-info span:last-child {
+                font-size: 0.7rem;
+            }
+
+            .carousel-nav {
+                justify-content: center;
+                margin-top: 0.25rem;
+            }
+
+            .nav-arrow {
+                width: 44px;
+                height: 44px;
+            }
+
+            .mobile-award-badge {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.85rem;
+                margin: 1.5rem auto 0;
+                padding: 0.6rem 1.25rem;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 100px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                width: fit-content;
+                max-width: 90%;
+            }
+
+            .mobile-award-badge .award-icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 10px;
+                flex-shrink: 0;
+            }
+
+            .mobile-award-badge .award-title {
+                font-size: 0.65rem;
+            }
+
+            .mobile-award-badge .award-subtitle {
+                font-size: 0.76rem;
+            }
+
+            /* Perimeter Floating 3D Models on Tablet/Mobile */
+            .berries-container,
+            .berries-container-bg,
+            .leaves-container {
+                pointer-events: none !important;
+                overflow: hidden;
+            }
+
+            .b1 { top: 6%; left: 3%; width: 75px; height: 75px; }
+            .b2 { top: 44%; left: 3%; width: 65px; height: 65px; }
+            .b3 { display: none; }
+            .b4 { top: 12%; left: 82%; width: 75px; height: 75px; }
+            .b5 { top: 78%; left: 5%; width: 65px; height: 65px; }
+            .b6 { display: none; }
+            .b7 { top: 32%; left: 84%; width: 60px; height: 60px; }
+            .b8 { display: none; }
+            .b9 { display: none; }
+
+            .l1 { top: 4%; left: 78%; width: 45px; height: 45px; }
+            .l2 { display: none; }
+            .l3 { top: 64%; left: 84%; width: 50px; height: 50px; }
+            .l4 { display: none; }
+        }
+
+        /* Mobile Breakpoint (<= 860px: Navigation Switch) */
+        @media (max-width: 860px) {
+            .header {
+                padding: 1rem 4%;
+                background: rgba(13, 4, 6, 0.75);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .contact-btn.desktop-order-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Smartphone Breakpoint (<= 480px) */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.9rem 4%;
+            }
+
+            .logo {
+                font-size: 1.18rem;
+                gap: 0.55rem;
+            }
+
+            .logo-icon {
+                width: 30px;
+                height: 30px;
+                border-radius: 8px;
+            }
+
+            .logo-tiger-img {
+                width: 22px;
+                height: 22px;
+            }
+
+            .contact-btn.desktop-order-btn {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.78rem;
+            }
+
+            .hero {
+                padding: 5rem 1rem 2rem;
+            }
+
+            .hero-content {
+                gap: 1rem;
+            }
+
+            .main-title {
+                font-size: clamp(2.1rem, 9.2vw, 3.1rem);
+                line-height: 0.96;
+            }
+
+            .description {
+                font-size: 0.88rem;
+                line-height: 1.5;
+                max-width: 320px;
+            }
+
+            .hero-center {
+                height: min(40vh, 320px);
+                margin: 0.4rem 0;
+            }
+
+            .carousel-cards {
+                gap: 0.5rem;
+                padding-top: 1.8rem;
+            }
+
+            .card {
+                width: min(104px, 29vw);
+                padding: 0.6rem 0.35rem 0.7rem;
+                padding-top: 3.8rem;
+                border-radius: 18px;
+                gap: 0.65rem;
+            }
+
+            .card img {
+                width: 78px;
+                height: 106px;
+                margin-top: -5.2rem;
+            }
+
+            .card-info span:first-child {
+                font-size: 0.68rem;
+            }
+
+            .card-info span:last-child {
+                font-size: 0.65rem;
+            }
+
+            .mobile-award-badge {
+                gap: 0.65rem;
+                padding: 0.5rem 0.9rem;
+                margin-top: 1.2rem;
+            }
+
+            .mobile-award-badge .award-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .mobile-award-badge .award-title {
+                font-size: 0.6rem;
+            }
+
+            .mobile-award-badge .award-subtitle {
+                font-size: 0.68rem;
+            }
+        }
+
+        /* Compact Smartphone Breakpoint (<= 370px, e.g. iPhone SE) */
+        @media (max-width: 370px) {
+            .card {
+                width: 96px;
+                padding-top: 3.4rem;
+            }
+
+            .card img {
+                width: 70px;
+                height: 96px;
+                margin-top: -4.8rem;
+            }
+
+            .carousel-cards {
+                gap: 0.35rem;
+            }
+
+            .main-title {
+                font-size: 1.95rem;
+            }
+
+            .hero-center {
+                height: 280px;
+            }
         }
     </style>
 </head>
@@ -669,13 +1225,7 @@
     <header class="header">
         <a href="#" class="logo">
             <div class="logo-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                    <line x1="6" y1="1" x2="6" y2="4"></line>
-                    <line x1="10" y1="1" x2="10" y2="4"></line>
-                    <line x1="14" y1="1" x2="14" y2="4"></line>
-                </svg>
+                <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img">
             </div>
             <span>ARN Coffee</span>
         </a>
@@ -686,8 +1236,37 @@
             <a href="#" class="nav-item">Craft</a>
             <a href="#" class="nav-item">Reviews</a>
         </nav>
-        <button class="contact-btn">Order Now</button>
+        <div class="header-actions">
+            <button class="contact-btn desktop-order-btn">Order Now</button>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
     </header>
+
+    <!-- Mobile Navigation Overlay & Drawer -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <div class="logo-icon" style="width: 28px; height: 28px; border-radius: 7px;">
+                    <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" class="logo-tiger-img" style="width: 20px; height: 20px;">
+                </div>
+                <span class="mobile-nav-title">Menu</span>
+            </div>
+            <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&times;</button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="#" class="mobile-nav-item active">Home</a>
+            <a href="#" class="mobile-nav-item">Menu</a>
+            <a href="#" class="mobile-nav-item">Origin</a>
+            <a href="#" class="mobile-nav-item">Craft</a>
+            <a href="#" class="mobile-nav-item">Reviews</a>
+        </nav>
+        <button class="mobile-drawer-btn">Order Now</button>
+    </aside>
 
     <!-- 3. Hero Main Section -->
     <main class="hero">
@@ -715,7 +1294,7 @@
                         <span class="plus-icon">+</span>
                     </button>
                 </div>
-                <div class="award-badge">
+                <div class="award-badge desktop-award-badge">
                     <div class="award-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
@@ -740,13 +1319,13 @@
                 <div class="bottle-stage">
                     <div class="bottle-card-3d" id="bottle-container">
                         <div class="bottle-layer active" data-flavor="berry">
-                            <img class="bottle-img" src="assets/bottles/bottle-berry-americano.png" alt="ARN Coffee Berry Americano">
+                            <img class="bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="ARN Coffee Berry Americano" fetchpriority="high">
                         </div>
                         <div class="bottle-layer" data-flavor="classic">
-                            <img class="bottle-img" src="assets/bottles/bottle-latte-classic.png" alt="ARN Coffee Aren Latte Classic">
+                            <img class="bottle-img" src="assets/bottles/bottle-latte-classic.webp" alt="ARN Coffee Aren Latte Classic" fetchpriority="low" loading="lazy">
                         </div>
                         <div class="bottle-layer" data-flavor="strong">
-                            <img class="bottle-img" src="assets/bottles/bottle-latte-strong.png" alt="ARN Coffee Aren Latte Strong">
+                            <img class="bottle-img" src="assets/bottles/bottle-latte-strong.webp" alt="ARN Coffee Aren Latte Strong" fetchpriority="low" loading="lazy">
                         </div>
                         <div class="bottle-glare" id="bottle-glare"></div>
                     </div>
@@ -769,21 +1348,21 @@
                 <div class="product-carousel">
                     <div class="carousel-cards">
                         <div class="card active" data-flavor="berry">
-                            <img src="assets/cards/card-berry-americano.png" alt="Berry Americano">
+                            <img src="assets/cards/card-berry-americano.webp" alt="Berry Americano">
                             <div class="card-info">
                                 <span>Berry Americano</span>
                                 <span>Rp 28.000</span>
                             </div>
                         </div>
                         <div class="card" data-flavor="classic">
-                            <img src="assets/cards/card-latte-classic.png" alt="Aren Latte Classic">
+                            <img src="assets/cards/card-latte-classic.webp" alt="Aren Latte Classic" loading="lazy">
                             <div class="card-info">
                                 <span>Aren Classic</span>
                                 <span>Rp 28.000</span>
                             </div>
                         </div>
                         <div class="card" data-flavor="strong">
-                            <img src="assets/cards/card-latte-strong.png" alt="Aren Latte Strong">
+                            <img src="assets/cards/card-latte-strong.webp" alt="Aren Latte Strong" loading="lazy">
                             <div class="card-info">
                                 <span>Aren Strong</span>
                                 <span>Rp 30.000</span>
@@ -795,6 +1374,17 @@
                         <button class="nav-arrow next-btn" aria-label="Next Flavor">→</button>
                     </div>
                 </div>
+                <div class="award-badge mobile-award-badge">
+                    <div class="award-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="award-text">
+                        <span class="award-title">SPECIALTY ROAST AWARDS</span>
+                        <span class="award-subtitle">INDONESIA BEST ARTISAN BREW 2025</span>
+                    </div>
+                </div>
                 <h2 class="side-title" id="hero-side-title">
                     <span class="outline">Wildly</span><br>
                     Electric
@@ -803,20 +1393,13 @@
         </div>
     </main>
 
-    <!-- 4. Hidden SVG Filter & Model Preloader -->
+    <!-- 4. Hidden SVG Filter -->
     <svg style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;">
         <filter id="frosted">
             <feTurbulence type="fractalNoise" baseFrequency="0.0125" numOctaves="3" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="80" xChannelSelector="R" yChannelSelector="G" />
         </filter>
     </svg>
-    <div style="display: none;">
-        <!-- Preload 3D models to eliminate lag during flavor switch -->
-        <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb"></model-viewer>
-        <model-viewer src="assets/models/coffee-bean.glb"></model-viewer>
-        <model-viewer src="assets/models/ice-cube.glb"></model-viewer>
-        <model-viewer src="assets/models/palm-sugar.glb"></model-viewer>
-    </div>
 
     <!-- 5. Interactive Motion & Choreography Script -->
     <script>
@@ -848,7 +1431,7 @@
                 title: '<span class="outline">ZAP!</span><br>Berry Americano',
                 desc: 'Unleash the electric collision of bold espresso and wild tart berries. A crisp, fruity burst of pure caffeine energy — redefined in every drop.',
                 sideTitle: '<span class="outline">Wildly</span><br>Electric',
-                bottleSrc: 'assets/bottles/bottle-berry-americano.png',
+                bottleSrc: 'assets/bottles/bottle-berry-americano.webp',
                 models: [
                     'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
                 ],
@@ -860,7 +1443,7 @@
                 title: '<span class="outline">Smooth</span><br>Aren Classic',
                 desc: 'Velvety fresh milk infused with authentic Indonesian gula aren and slow-dripped espresso. Unapologetically smooth, deeply comforting.',
                 sideTitle: '<span class="outline">Ultra</span><br>Creamy',
-                bottleSrc: 'assets/bottles/bottle-latte-classic.png',
+                bottleSrc: 'assets/bottles/bottle-latte-classic.webp',
                 models: [
                     'assets/models/coffee-bean.glb',
                     'assets/models/ice-cube.glb'
@@ -873,7 +1456,7 @@
                 title: '<span class="outline">Double</span><br>Shot Roar',
                 desc: 'Double shot of dark-roasted Arabica crafted for relentless minds. High caffeine, raw palm sugar, and untamed tiger energy.',
                 sideTitle: '<span class="outline">Fiercely</span><br>Bold',
-                bottleSrc: 'assets/bottles/bottle-latte-strong.png',
+                bottleSrc: 'assets/bottles/bottle-latte-strong.webp',
                 models: [
                     'assets/models/coffee-bean.glb',
                     'assets/models/palm-sugar.glb'
@@ -883,12 +1466,76 @@
             }
         };
 
-        // Preload bottle images for instantaneous switching
+        // Idle-time preloader for secondary flavors and 3D models (zero initial network/CPU congestion)
         const preloadedBottles = {};
-        flavors.forEach(key => {
-            const img = new Image();
-            img.src = flavorConfigs[key].bottleSrc;
-            preloadedBottles[key] = img;
+        const prefetchIdle = () => {
+            ['classic', 'strong'].forEach(key => {
+                const img = new Image();
+                img.src = flavorConfigs[key].bottleSrc;
+                preloadedBottles[key] = img;
+            });
+
+            // Prefetch 3D models via HTTP fetch so they are cached without spawning WebGL contexts
+            const modelsToPrefetch = [
+                'assets/models/coffee-bean.glb',
+                'assets/models/ice-cube.glb',
+                'assets/models/palm-sugar.glb'
+            ];
+            modelsToPrefetch.forEach(url => {
+                fetch(url).catch(() => {});
+            });
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(prefetchIdle, { timeout: 2000 });
+        } else {
+            setTimeout(prefetchIdle, 1200);
+        }
+
+        // Mobile Drawer Navigation
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+        const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-item');
+        const mobileDrawerBtn = document.querySelector('.mobile-drawer-btn');
+        const mobileCloseBtn = document.getElementById('mobile-nav-close');
+
+        function toggleMobileMenu(forceState) {
+            if (!mobileNavDrawer || !menuToggle) return;
+            const isOpen = typeof forceState === 'boolean' ? forceState : !mobileNavDrawer.classList.contains('open');
+            menuToggle.classList.toggle('open', isOpen);
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            mobileNavOverlay.classList.toggle('open', isOpen);
+            mobileNavDrawer.classList.toggle('open', isOpen);
+            mobileNavDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        }
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMobileMenu();
+            });
+        }
+        if (mobileNavOverlay) {
+            mobileNavOverlay.addEventListener('click', () => toggleMobileMenu(false));
+        }
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', () => toggleMobileMenu(false));
+        }
+        if (mobileDrawerBtn) {
+            mobileDrawerBtn.addEventListener('click', () => toggleMobileMenu(false));
+        }
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                toggleMobileMenu(false);
+            });
+        });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNavDrawer && mobileNavDrawer.classList.contains('open')) {
+                toggleMobileMenu(false);
+            }
         });
 
         // Card Click Handlers
@@ -1056,19 +1703,38 @@
                         completedBerries++;
                         if (completedBerries === berries.length) {
                             isSwitching = false;
+                            cacheBerryPositions();
                         }
                     }
                 });
             });
         }
 
-        // Initialize Berry States
+        // Initialize Berry States & Cache Centers (eliminates 60 FPS layout thrashing)
+        let berryCenters = [];
+        function cacheBerryPositions() {
+            berryCenters = Array.from(allBerries).map(b => {
+                const rect = b.getBoundingClientRect();
+                const curRx = parseFloat(b.dataset.rx) || 0;
+                const curRy = parseFloat(b.dataset.ry) || 0;
+                const curBaseX = parseFloat(b.dataset.baseX) || 0;
+                const curBaseY = parseFloat(b.dataset.baseY) || 0;
+                return {
+                    x: rect.left + rect.width / 2 - (curRx + curBaseX),
+                    y: rect.top + rect.height / 2 - (curRy + curBaseY)
+                };
+            });
+        }
+
         allBerries.forEach(b => {
             b.dataset.rx = 0; b.dataset.ry = 0; 
             b.dataset.angle = Math.random() * 360;
             b.dataset.baseX = 0; b.dataset.baseY = 0;
             b.dataset.targetRx = 0; b.dataset.targetRy = 0;
         });
+
+        setTimeout(cacheBerryPositions, 100);
+        window.addEventListener('resize', cacheBerryPositions, { passive: true });
 
         // Mouse Motion Tracking & Smooth Lerp
         let mouse = { x: 0, y: 0, px: window.innerWidth / 2, py: window.innerHeight / 2 };
@@ -1138,8 +1804,13 @@
             }
         });
 
-        // Continuous Animation Loop
+        // Continuous Animation Loop with Page Visibility & Layout-Thrashing Protection
+        let isAnimationActive = true;
+        let animFrameId = null;
+        let bubbleIntervalId = null;
+
         function animate() {
+            if (!isAnimationActive) return;
             const time = Date.now() * 0.001;
 
             // Smoothly interpolate current mouse to target
@@ -1168,32 +1839,33 @@
             berriesBG.style.transform = `translate(${currentMouse.x * -30}px, ${currentMouse.y * -30}px)`;
             leavesBG.style.transform = `translate(${currentMouse.x * -15}px, ${currentMouse.y * -15}px)`;
 
-            // Update Berries Repulsion & Sine Floating
+            // Update Berries Repulsion & Sine Floating (Optimized: No getBoundingClientRect() inside 60fps loop)
             if (!isSwitching) {
                 allBerries.forEach((berry, i) => {
-                    const berryRect = berry.getBoundingClientRect();
-                    const berryX = berryRect.left + berryRect.width / 2;
-                    const berryY = berryRect.top + berryRect.height / 2;
-
-                    const diffX = mouse.px - berryX;
-                    const diffY = mouse.py - berryY;
-                    const distance = Math.sqrt(diffX * diffX + diffY * diffY);
-
-                    let targetRx = 0, targetRy = 0, speedMult = 1;
-
-                    // 400px Force-Field Repulsion
-                    if (distance < 400) {
-                        const force = (400 - distance) / 400;
-                        targetRx = (diffX / distance) * force * -80;
-                        targetRy = (diffY / distance) * force * -80;
-                        speedMult = 1 + force * 5;
-                    }
-
+                    const center = berryCenters[i];
                     let rx = parseFloat(berry.dataset.rx) || 0;
                     let ry = parseFloat(berry.dataset.ry) || 0;
                     let angle = parseFloat(berry.dataset.angle) || 0;
                     let baseX = parseFloat(berry.dataset.baseX) || 0;
                     let baseY = parseFloat(berry.dataset.baseY) || 0;
+
+                    let targetRx = 0, targetRy = 0, speedMult = 1;
+
+                    if (center) {
+                        const currentBerryX = center.x + rx + baseX;
+                        const currentBerryY = center.y + ry + baseY;
+                        const diffX = mouse.px - currentBerryX;
+                        const diffY = mouse.py - currentBerryY;
+                        const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+
+                        // 400px Force-Field Repulsion
+                        if (distance < 400) {
+                            const force = (400 - distance) / 400;
+                            targetRx = (diffX / distance) * force * -80;
+                            targetRy = (diffY / distance) * force * -80;
+                            speedMult = 1 + force * 5;
+                        }
+                    }
 
                     rx += (targetRx - rx) * 0.1;
                     ry += (targetRy - ry) * 0.1;
@@ -1223,18 +1895,53 @@
                 leaf.style.transform = `translate(${floatX}px, ${floatY}px) rotate(${floatAngle}deg)`;
             });
 
-            requestAnimationFrame(animate);
+            animFrameId = requestAnimationFrame(animate);
         }
 
-        animate();
+        function startAnimation() {
+            if (!animFrameId) {
+                isAnimationActive = true;
+                animFrameId = requestAnimationFrame(animate);
+            }
+            if (!bubbleIntervalId) {
+                bubbleIntervalId = setInterval(createBubble, 450);
+            }
+        }
 
-        // Rising Bubbles & Sparkling Particles Generator
+        function stopAnimation() {
+            isAnimationActive = false;
+            if (animFrameId) {
+                cancelAnimationFrame(animFrameId);
+                animFrameId = null;
+            }
+            if (bubbleIntervalId) {
+                clearInterval(bubbleIntervalId);
+                bubbleIntervalId = null;
+            }
+        }
+
+        // Page Visibility API - Pauses 60 FPS animation loop & bubble creation when tab is backgrounded
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAnimation();
+            } else {
+                startAnimation();
+            }
+        });
+
+        // Start animation loop initially
+        startAnimation();
+
+        // Rising Bubbles & Sparkling Particles Generator (Capped at 16 elements to avoid DOM churn)
         const bubblesContainer = document.getElementById('bubbles-container');
         function createBubble() {
-            if (!bubblesContainer) return;
+            if (!bubblesContainer || document.hidden) return;
+            if (bubblesContainer.childElementCount >= 16) return;
+
             const bubble = document.createElement('img');
             bubble.src = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/bubble.png';
             bubble.className = 'bubble-img';
+            bubble.decoding = 'async';
             const size = Math.random() * 20 + 10 + 'px';
             bubble.style.width = size;
             bubble.style.height = 'auto';
@@ -1248,7 +1955,6 @@
             bubblesContainer.appendChild(bubble);
             setTimeout(() => bubble.remove(), duration * 1000);
         }
-        setInterval(createBubble, 400);
     </script>
 </body>
 </html>
