@@ -1,0 +1,15 @@
+.git/
+.gitignore
+.hallmark/
+references/
+scripts/
+AGENTS.md
+README.md
+package.json
+package-lock.json
+node_modules/
+.wrangler/
+wrangler.toml
+wrangler.json
+wrangler.jsonc
+.assetsignore

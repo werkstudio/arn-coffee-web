@@ -21,6 +21,9 @@ venv/
 node_modules/
 npm-debug.log*
 
+# Cloudflare Workers
+.wrangler/
+
 # Temporary files
 /tmp/
 *.tmp

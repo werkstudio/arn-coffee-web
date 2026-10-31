@@ -131,3 +131,14 @@ Sebelum melaporkan tugas selesai atau melakukan commit:
 * `scripts/build_textures.py`: Generator tekstur prosedural botol.
 * `scripts/build_bottle_assets.py`: Utilitas pengolah gambar botol WebP.
 * `references/`: Folder aset referensi dan mockup mentah.
+
+---
+
+## 8. Panduan Deployment Cloudflare Workers
+
+Proyek ini dikonfigurasi menggunakan **Cloudflare Workers Static Assets** (bukan Workers Sites lawas):
+* **Konfigurasi Utama**: [wrangler.toml](file:///Users/arry/Documents/Projects/arn-coffee-web/wrangler.toml) (`[assets]` block).
+* **Asset Whitelist / Ignore**: [.assetsignore](file:///Users/arry/Documents/Projects/arn-coffee-web/.assetsignore) menyaring file dokumentasi, skrip build python, dan folder `.git` agar tidak ikut terunggah ke Cloudflare edge.
+* **Header Keamanan & Caching**: [_headers](file:///Users/arry/Documents/Projects/arn-coffee-web/_headers) menyetel `Cache-Control: public, max-age=31536000, immutable` pada folder `/assets/*`.
+* **Perintah Deploy**: `npx wrangler deploy` (atau `npm run deploy`).
+

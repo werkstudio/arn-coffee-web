@@ -130,6 +130,43 @@ Klik kanan pada file `index.html` dan pilih **"Open with Live Server"**.
 
 ---
 
+## ☁️ Deployment ke Cloudflare Workers
+
+Proyek ini telah dikonfigurasi menggunakan **Cloudflare Workers Static Assets** (`wrangler.toml` & `_headers`) untuk performa CDN edge global, kompresi otomatis (Brotli/Gzip), dan caching statis instan.
+
+### 1. Prasyarat
+Pastikan Anda memiliki akun Cloudflare dan telah menginstal dependensi:
+```bash
+npm install
+```
+
+### 2. Uji Coba Lokal (Workers Dev Server)
+Untuk menjalankan web di lingkungan simulasi Cloudflare Workers:
+```bash
+npx wrangler dev
+# atau
+npm run dev
+```
+
+### 3. Deploy ke Cloudflare Workers
+Pastikan Anda sudah login ke akun Cloudflare di terminal Anda:
+```bash
+npx wrangler login
+```
+Lalu jalankan perintah deployment:
+```bash
+npx wrangler deploy
+# atau
+npm run deploy
+```
+
+> **Detail Konfigurasi:**
+> * `wrangler.toml`: Menggunakan fitur modern `[assets]` dengan `not_found_handling = "single-page-application"`.
+> * `.assetsignore`: Memastikan hanya file produksi (`index.html`, `assets/`, `_headers`) yang diunggah ke edge CDN Cloudflare.
+> * `_headers`: Menetapkan header keamanan (`nosniff`, `DENY`) dan cache immutable 1 tahun untuk `/assets/*`.
+
+---
+
 ## 📍 Informasi Bisnis & Operasional
 
 * **Nama Brand**: ARN Coffee

@@ -1,0 +1,7 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "arn-coffee-web"
+compatibility_date = "2024-11-01"
+
+[assets]
+directory = "."
+not_found_handling = "single-page-application"
