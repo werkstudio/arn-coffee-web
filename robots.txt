@@ -1,5 +1,5 @@
-# robots.txt for ARN Coffee (arncoffee.com)
+# robots.txt for ARN Coffee (coffee.arnhouse.my.id)
 User-agent: *
 Allow: /
 
-Sitemap: https://arncoffee.com/sitemap.xml
+Sitemap: https://coffee.arnhouse.my.id/sitemap.xml
