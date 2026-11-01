@@ -20,6 +20,7 @@ Semua varian disajikan dalam kemasan botol higienis **200ml** dengan harga serag
 | **Berry Americano** | *Crisp, fruity, electric* | Signature Houseblend 100% Organic Espresso + 100% Pure Berry Juice | 200ml · Rp 18.000 |
 | **Aren Latte Classic** | *Smooth, velvety, comforting* | Signature Houseblend Espresso + Fresh Creamy Milk + 100% Gula Aren Murni | 200ml · Rp 18.000 |
 | **Aren Latte Strong** | *Fierce, double shot, bold* | Double Shot Dark-Roast Organic Arabica + Raw Palm Sugar + Fresh Milk | 200ml · Rp 18.000 |
+| **Matcha Latte** | *Earthy, silky, umami* | 100% Real Artisan Matcha Murni + Velvety Fresh Milk | 200ml · Rp 18.000 |
 
 > **Penyimpanan:** Wajib disimpan dalam kulkas bersuhu 4°C. Kocok perlahan sebelum dinikmati. Masa simpan optimal 7 hari dalam kondisi dingin.
 
@@ -37,6 +38,7 @@ Semua varian disajikan dalam kemasan botol higienis **200ml** dengan harga serag
      - **Berry Americano**: Floating cherries & leaves.
      - **Aren Classic**: Biji kopi 3D & balok es batu (*ice cubes*).
      - **Aren Strong**: Biji kopi 3D & lempengan gula aren (*palm sugar*).
+     - **Matcha Latte**: Daun teh 3D (*leaves*) & balok es batu (*ice cubes*).
    - Efek gravitasi/repulsi 400px: Elemen menjauh secara organik saat didekati kursor pengguna.
 
 3. **Sinkronisasi Multi-Komponen (Unified State)**
@@ -86,15 +88,18 @@ arn-coffee-web/
 │   ├── bottles/               # Aset foto botol WebP transparan (200ml)
 │   │   ├── bottle-berry-americano.webp
 │   │   ├── bottle-latte-classic.webp
-│   │   └── bottle-latte-strong.webp
+│   │   ├── bottle-latte-strong.webp
+│   │   └── bottle-matcha-latte.webp
 │   ├── cards/                 # Thumbnail kartu carousel rasa
 │   │   ├── card-berry-americano.webp
 │   │   ├── card-latte-classic.webp
-│   │   └── card-latte-strong.webp
-│   ├── models/                # Aset 3D GLB (biji kopi, es batu, aren)
+│   │   ├── card-latte-strong.webp
+│   │   └── card-matcha-latte.webp
+│   ├── models/                # Aset 3D GLB (biji kopi, es batu, aren, daun)
 │   │   ├── coffee-bean.glb
 │   │   ├── ice-cube.glb
-│   │   └── palm-sugar.glb
+│   │   ├── palm-sugar.glb
+│   │   └── leaves.glb
 │   ├── textures/              # Peta tekstur untuk model 3D
 │   ├── logo-tiger-transparent.webp
 │   └── logo-tiger-badge.webp

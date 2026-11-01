@@ -24,6 +24,7 @@ Jangan pernah mengarang (*hallucinate*) data bisnis atau penghargaan fiktif. Sel
   * **Biji Kopi**: Signature Houseblend, 100% Organik (Profil sangrai artisan).
   * **Berry Americano**: 100% Sari Buah Berry Murni (bukan perisa sintetis).
   * **Aren**: 100% Sari Nira Aren Murni Organik (tanpa sirup jagung/pemanis buatan).
+  * **Matcha**: 100% Real Artisan Matcha Murni & Fresh Milk Gurih Alami.
 * **Alamat Roastery**:
   `Mega Regency No.Kav.42, Karang Pamulang, Mandalajati, Bandung City, West Java 40195`
 * **Jam Operasional**:
@@ -37,8 +38,8 @@ Jangan pernah mengarang (*hallucinate*) data bisnis atau penghargaan fiktif. Sel
 
 State utama aplikasi dikendalikan oleh:
 ```javascript
-let activeFlavorIndex = 0; // 0: berry, 1: classic, 2: strong
-const flavors = ['berry', 'classic', 'strong'];
+let activeFlavorIndex = 0; // 0: berry, 1: classic, 2: strong, 3: matcha
+const flavors = ['berry', 'classic', 'strong', 'matcha'];
 const flavorConfigs = { ... };
 ```
 

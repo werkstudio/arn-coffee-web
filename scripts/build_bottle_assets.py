@@ -2,12 +2,12 @@ import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 from scipy import ndimage
-from rembg import remove
 
 def extract_clean_bottle():
     print("1. Extracting bottle from references/bottle.png...")
     raw_path = 'references/bottle_cutout_raw.png'
     if not os.path.exists(raw_path):
+        from rembg import remove
         input_img = Image.open('references/bottle.png')
         output_img = remove(input_img)
         output_img.save(raw_path)
@@ -41,7 +41,8 @@ def extract_clean_bottle():
     os.makedirs('assets/bottles', exist_ok=True)
     berry_path = 'assets/bottles/bottle-berry-americano.png'
     cropped.save(berry_path)
-    print(f"Saved {berry_path} (size: {cropped.size})")
+    cropped.save('assets/bottles/bottle-berry-americano.webp', 'WEBP', quality=90)
+    print(f"Saved {berry_path} and .webp (size: {cropped.size})")
     return cropped
 
 def extract_lighting_gloss(base_bottle, lx1, ly1, lx2, ly2):
@@ -114,7 +115,8 @@ def build_variant_bottles(base_bottle):
     classic_bottle.paste(classic_label_gloss, (lx1, ly1), label_mask_feathered)
     classic_path = 'assets/bottles/bottle-latte-classic.png'
     classic_bottle.save(classic_path)
-    print(f"Saved {classic_path}")
+    classic_bottle.save('assets/bottles/bottle-latte-classic.webp', 'WEBP', quality=90)
+    print(f"Saved {classic_path} and .webp")
 
     # 2. Aren Latte Strong
     strong_r = np.clip(lum * 1.35 * 255 + 35, 0, 255)
@@ -137,20 +139,46 @@ def build_variant_bottles(base_bottle):
     strong_bottle.paste(strong_label_gloss, (lx1, ly1), label_mask_feathered)
     strong_path = 'assets/bottles/bottle-latte-strong.png'
     strong_bottle.save(strong_path)
-    print(f"Saved {strong_path}")
+    strong_bottle.save('assets/bottles/bottle-latte-strong.webp', 'WEBP', quality=90)
+    print(f"Saved {strong_path} and .webp")
 
-    return classic_bottle, strong_bottle
+    # 3. Matcha Latte
+    matcha_r = np.clip(lum * 1.05 * 255 + 38, 0, 255)
+    matcha_g = np.clip(lum * 1.45 * 255 + 55, 0, 255)
+    matcha_b = np.clip(lum * 0.65 * 255 + 20, 0, 255)
 
-def build_carousel_cards(berry_bottle, classic_bottle, strong_bottle):
+    arr_matcha = arr.copy()
+    for i, comp in enumerate([matcha_r, matcha_g, matcha_b]):
+        arr_matcha[:, :, i] = arr[:, :, i] * (1.0 - liquid_weight) + comp * liquid_weight
+
+    matcha_bottle = Image.fromarray(np.clip(arr_matcha, 0, 255).astype(np.uint8))
+    matcha_ref = Image.open('references/arn-matcha-latte-strong.png').convert('RGBA')
+    matcha_label = matcha_ref.resize((lw, lh), Image.Resampling.LANCZOS)
+
+    ma_arr = np.array(matcha_label, dtype=np.float32)
+    for i in range(3):
+        ma_arr[:, :, i] = np.clip(ma_arr[:, :, i] + shine_arr * 28.0, 0, 255)
+    matcha_label_gloss = Image.fromarray(ma_arr.astype(np.uint8))
+
+    matcha_bottle.paste(matcha_label_gloss, (lx1, ly1), label_mask_feathered)
+    matcha_path = 'assets/bottles/bottle-matcha-latte.png'
+    matcha_bottle.save(matcha_path)
+    matcha_bottle.save('assets/bottles/bottle-matcha-latte.webp', 'WEBP', quality=90)
+    print(f"Saved {matcha_path} and .webp")
+
+    return classic_bottle, strong_bottle, matcha_bottle
+
+def build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bottle):
     print("3. Generating updated carousel cards in assets/cards/...")
     os.makedirs('assets/cards', exist_ok=True)
     bottles = [
-        (berry_bottle, 'assets/cards/card-berry-americano.png', (128, 22, 37)),
-        (classic_bottle, 'assets/cards/card-latte-classic.png', (165, 113, 60)),
-        (strong_bottle, 'assets/cards/card-latte-strong.png', (84, 37, 10))
+        (berry_bottle, 'assets/cards/card-berry-americano', (128, 22, 37)),
+        (classic_bottle, 'assets/cards/card-latte-classic', (165, 113, 60)),
+        (strong_bottle, 'assets/cards/card-latte-strong', (84, 37, 10)),
+        (matcha_bottle, 'assets/cards/card-matcha-latte', (54, 108, 48))
     ]
 
-    for bottle_img, out_path, bg_tint in bottles:
+    for bottle_img, out_prefix, bg_tint in bottles:
         # Create 512x512 card with subtle glass glow
         card = Image.new('RGBA', (512, 512), (0, 0, 0, 0))
         
@@ -172,13 +200,16 @@ def build_carousel_cards(berry_bottle, classic_bottle, strong_bottle):
         pos_y = (512 - new_h) // 2 - 5
 
         card.alpha_composite(resized_bottle, (pos_x, pos_y))
-        card.save(out_path)
-        print(f"Saved card: {out_path}")
+        png_path = f"{out_prefix}.png"
+        webp_path = f"{out_prefix}.webp"
+        card.save(png_path)
+        card.save(webp_path, 'WEBP', quality=90)
+        print(f"Saved card: {png_path} and {webp_path}")
 
 def main():
     berry_bottle = extract_clean_bottle()
-    classic_bottle, strong_bottle = build_variant_bottles(berry_bottle)
-    build_carousel_cards(berry_bottle, classic_bottle, strong_bottle)
+    classic_bottle, strong_bottle, matcha_bottle = build_variant_bottles(berry_bottle)
+    build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bottle)
     print("All bottle assets generated successfully!")
 
 if __name__ == '__main__':
