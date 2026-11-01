@@ -1,6 +1,8 @@
 .git/
 .gitignore
 .hallmark/
+.agents/
+skills-lock.json
 references/
 scripts/
 AGENTS.md
