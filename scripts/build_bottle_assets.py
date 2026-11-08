@@ -1,9 +1,14 @@
 import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
-from scipy import ndimage
 
 def extract_clean_bottle():
+    berry_path = 'assets/bottles/bottle-berry-americano.png'
+    if os.path.exists(berry_path):
+        return Image.open(berry_path).convert('RGBA')
+
+    from scipy import ndimage
+
     print("1. Extracting bottle from references/bottle.png...")
     raw_path = 'references/bottle_cutout_raw.png'
     if not os.path.exists(raw_path):
@@ -39,7 +44,6 @@ def extract_clean_bottle():
     )
     cropped = clean_img.crop(crop_box)
     os.makedirs('assets/bottles', exist_ok=True)
-    berry_path = 'assets/bottles/bottle-berry-americano.png'
     cropped.save(berry_path)
     cropped.save('assets/bottles/bottle-berry-americano.webp', 'WEBP', quality=90)
     print(f"Saved {berry_path} and .webp (size: {cropped.size})")
@@ -166,16 +170,58 @@ def build_variant_bottles(base_bottle):
     matcha_bottle.save('assets/bottles/bottle-matcha-latte.webp', 'WEBP', quality=90)
     print(f"Saved {matcha_path} and .webp")
 
-    return classic_bottle, strong_bottle, matcha_bottle
+    # 4. Butterscotch Latte
+    bs_r = np.clip(lum * 1.65 * 255 + 58, 0, 255)
+    bs_g = np.clip(lum * 1.28 * 255 + 32, 0, 255)
+    bs_b = np.clip(lum * 0.72 * 255 + 12, 0, 255)
 
-def build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bottle):
+    arr_bs = arr.copy()
+    for i, comp in enumerate([bs_r, bs_g, bs_b]):
+        arr_bs[:, :, i] = arr[:, :, i] * (1.0 - liquid_weight) + comp * liquid_weight
+
+    bs_bottle = Image.fromarray(np.clip(arr_bs, 0, 255).astype(np.uint8))
+    
+    # Process butterscotch reference label if needed
+    bs_ref_path = 'references/arn-butterscotch-latte.png'
+    if not os.path.exists(bs_ref_path):
+        raw_bs = Image.open('references/arn-butterscotch-latte.jpg')
+        bw_raw, bh_raw = raw_bs.size
+        target_h = int(bw_raw * 1066 / 797)
+        pad_top = int((target_h - bh_raw) * 0.7)
+        pad_bottom = target_h - bh_raw - pad_top
+        top_color = tuple(np.array(raw_bs)[0, :, :].mean(axis=0).astype(int))
+        bottom_color = tuple(np.array(raw_bs)[-1, :, :].mean(axis=0).astype(int))
+        new_bs = Image.new('RGB', (bw_raw, target_h), top_color)
+        draw_bs = ImageDraw.Draw(new_bs)
+        draw_bs.rectangle([0, bh_raw + pad_top, bw_raw, target_h], fill=bottom_color)
+        new_bs.paste(raw_bs, (0, pad_top))
+        new_bs.save(bs_ref_path)
+
+    bs_ref = Image.open(bs_ref_path).convert('RGBA')
+    bs_label = bs_ref.resize((lw, lh), Image.Resampling.LANCZOS)
+
+    bs_arr = np.array(bs_label, dtype=np.float32)
+    for i in range(3):
+        bs_arr[:, :, i] = np.clip(bs_arr[:, :, i] + shine_arr * 28.0, 0, 255)
+    bs_label_gloss = Image.fromarray(bs_arr.astype(np.uint8))
+
+    bs_bottle.paste(bs_label_gloss, (lx1, ly1), label_mask_feathered)
+    bs_path = 'assets/bottles/bottle-butterscotch.png'
+    bs_bottle.save(bs_path)
+    bs_bottle.save('assets/bottles/bottle-butterscotch.webp', 'WEBP', quality=90)
+    print(f"Saved {bs_path} and .webp")
+
+    return classic_bottle, strong_bottle, matcha_bottle, bs_bottle
+
+def build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bottle, bs_bottle):
     print("3. Generating updated carousel cards in assets/cards/...")
     os.makedirs('assets/cards', exist_ok=True)
     bottles = [
         (berry_bottle, 'assets/cards/card-berry-americano', (128, 22, 37)),
         (classic_bottle, 'assets/cards/card-latte-classic', (165, 113, 60)),
         (strong_bottle, 'assets/cards/card-latte-strong', (84, 37, 10)),
-        (matcha_bottle, 'assets/cards/card-matcha-latte', (54, 108, 48))
+        (matcha_bottle, 'assets/cards/card-matcha-latte', (54, 108, 48)),
+        (bs_bottle, 'assets/cards/card-butterscotch', (180, 115, 30))
     ]
 
     for bottle_img, out_prefix, bg_tint in bottles:
@@ -208,8 +254,8 @@ def build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bot
 
 def main():
     berry_bottle = extract_clean_bottle()
-    classic_bottle, strong_bottle, matcha_bottle = build_variant_bottles(berry_bottle)
-    build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bottle)
+    classic_bottle, strong_bottle, matcha_bottle, bs_bottle = build_variant_bottles(berry_bottle)
+    build_carousel_cards(berry_bottle, classic_bottle, strong_bottle, matcha_bottle, bs_bottle)
     print("All bottle assets generated successfully!")
 
 if __name__ == '__main__':

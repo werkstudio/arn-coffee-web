@@ -180,6 +180,27 @@
                   "url": "https://coffee.arnhouse.my.id/"
                 }
               }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "item": {
+                "@type": "Product",
+                "name": "ARN Coffee - Butterscotch Latte",
+                "description": "Harmoni legit butterscotch gurih, golden toffee manis alami, dan espresso organik berpadu susu segar dalam botol 200ml.",
+                "image": "https://coffee.arnhouse.my.id/assets/bottles/bottle-butterscotch.png",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "ARN Coffee"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "18000",
+                  "priceCurrency": "IDR",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://coffee.arnhouse.my.id/"
+                }
+              }
             }
           ]
         }
@@ -2036,6 +2057,7 @@
             <button type="button" class="nav-item" data-flavor="classic">Aren Classic</button>
             <button type="button" class="nav-item" data-flavor="strong">Aren Strong</button>
             <button type="button" class="nav-item" data-flavor="matcha">Matcha Latte</button>
+            <button type="button" class="nav-item" data-flavor="butterscotch">Butterscotch</button>
             <span class="nav-separator" aria-hidden="true"></span>
             <button type="button" class="nav-item nav-story-btn" id="open-story-btn">Cerita & Bahan</button>
         </nav>
@@ -2081,6 +2103,10 @@
             </button>
             <button type="button" class="mobile-nav-item" data-flavor="matcha">
                 <span class="mobile-item-title">Matcha Latte</span>
+                <span class="mobile-item-price">Rp 18.000</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-flavor="butterscotch">
+                <span class="mobile-item-title">Butterscotch Latte</span>
                 <span class="mobile-item-price">Rp 18.000</span>
             </button>
         </nav>
@@ -2174,6 +2200,9 @@
                         <div class="bottle-layer" data-flavor="matcha">
                             <img class="bottle-img" src="assets/bottles/bottle-matcha-latte.webp" alt="ARN Coffee Matcha Latte" width="943" height="1816" fetchpriority="low" loading="lazy">
                         </div>
+                        <div class="bottle-layer" data-flavor="butterscotch">
+                            <img class="bottle-img" src="assets/bottles/bottle-butterscotch.webp" alt="ARN Coffee Butterscotch Latte" width="943" height="1816" fetchpriority="low" loading="lazy">
+                        </div>
                         <div class="bottle-glare" id="bottle-glare"></div>
                     </div>
                     <div class="bottle-shadow"></div>
@@ -2219,6 +2248,13 @@
                             <img src="assets/cards/card-matcha-latte.webp" alt="Matcha Latte" width="512" height="512" loading="lazy">
                             <div class="card-info">
                                 <span>Matcha Latte</span>
+                                <span>Rp 18.000 · 200ml</span>
+                            </div>
+                        </div>
+                        <div class="card" data-flavor="butterscotch">
+                            <img src="assets/cards/card-butterscotch.webp" alt="Butterscotch Latte" width="512" height="512" loading="lazy">
+                            <div class="card-info">
+                                <span>Butterscotch</span>
                                 <span>Rp 18.000 · 200ml</span>
                             </div>
                         </div>
@@ -2285,6 +2321,11 @@
                         <button type="button" class="flavor-chip" data-flavor="matcha">
                             <span class="flavor-dot" style="background: #7bd459;"></span>
                             <span class="flavor-chip-name">Matcha Latte</span>
+                            <span class="flavor-chip-price">Rp 18k</span>
+                        </button>
+                        <button type="button" class="flavor-chip" data-flavor="butterscotch">
+                            <span class="flavor-dot" style="background: #f5a623;"></span>
+                            <span class="flavor-chip-name">Butterscotch</span>
                             <span class="flavor-chip-price">Rp 18k</span>
                         </button>
                     </div>
@@ -2428,7 +2469,7 @@
         let isSwitching = false;
         let switchTilt = 0;
         let activeFlavorIndex = 0;
-        const flavors = ['berry', 'classic', 'strong', 'matcha'];
+        const flavors = ['berry', 'classic', 'strong', 'matcha', 'butterscotch'];
 
         // Flavor configurations with thematic 3D floating elements
         const flavorConfigs = {
@@ -2498,6 +2539,23 @@
                 ],
                 colors: { inner: '#275825', mid: '#142d13', outer: '#081408' },
                 accent: '#7bd459'
+            },
+            butterscotch: {
+                name: 'Butterscotch Latte',
+                price: 'Rp 18.000',
+                priceNum: 18000,
+                volume: '200ml',
+                shortDesc: 'Signature espresso organik, butter gurih, toffee karamel, & fresh milk (200ml).',
+                title: '<span class="outline">Gurih</span><br>Butterscotch',
+                desc: 'Harmoni legit butterscotch gurih, golden toffee manis alami, dan signature espresso organik berpadu susu segar. Sensasi sweet & savory yang memanjakan lidah di setiap botol 200ml.',
+                sideTitle: '<span class="outline">Sweet &</span><br>Savory',
+                bottleSrc: 'assets/bottles/bottle-butterscotch.webp',
+                models: [
+                    'assets/models/coffee-bean.glb',
+                    'assets/models/palm-sugar.glb'
+                ],
+                colors: { inner: '#a46315', mid: '#522e08', outer: '#1c0e02' },
+                accent: '#f5a623'
             }
         };
 
@@ -2507,7 +2565,7 @@
         const prefetchIdle = () => {
             if (idlePrefetched) return;
             idlePrefetched = true;
-            ['classic', 'strong', 'matcha'].forEach(key => {
+            ['classic', 'strong', 'matcha', 'butterscotch'].forEach(key => {
                 const img = new Image();
                 img.src = flavorConfigs[key].bottleSrc;
                 preloadedBottles[key] = img;
