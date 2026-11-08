@@ -331,6 +331,12 @@
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
             }
+            .bubble-img {
+                /* Preserve subtle ambient fizzy bubble drift for brand identity */
+                animation-duration: 7.5s !important;
+                animation-iteration-count: infinite !important;
+                opacity: 0.8 !important;
+            }
         }
 
         button, .card, .nav-item, .mobile-nav-item, .logo {
@@ -3965,41 +3971,51 @@ Alamat Pengiriman:
         // Start animation loop initially
         startAnimation();
 
-        // Rising Bubbles & Sparkling Particles Generator (Capped at 24 elements)
+        // Rising Bubbles & Sparkling Particles Generator (Infinite ambient flow)
         const bubblesContainer = document.getElementById('bubbles-container');
-        function createBubble(initialY = null) {
+        function createBubble(isInitial = false) {
             if (!bubblesContainer || document.hidden) return;
-            if (bubblesContainer.childElementCount >= 24) return;
+            if (bubblesContainer.childElementCount >= 22) return;
 
             const bubble = document.createElement('img');
             bubble.src = 'assets/textures/bubble.png';
             bubble.className = 'bubble-img';
             bubble.decoding = 'async';
-            const size = Math.random() * 22 + 12 + 'px';
-            bubble.style.width = size;
-            bubble.style.height = 'auto';
-            bubble.style.left = Math.random() * 92 + 4 + '%';
+            const size = Math.random() * 20 + 13; // 13px - 33px
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${Math.random() * 90 + 5}%`;
+            bubble.style.bottom = '-40px';
 
-            const duration = Math.random() * 5 + 4.5;
-            if (initialY !== null) {
-                bubble.style.bottom = initialY + '%';
-                const remainingRatio = Math.max(0.1, (100 - initialY) / 100);
-                const remDuration = (duration * remainingRatio).toFixed(2);
-                bubble.style.animation = `floatUpImg ${remDuration}s linear forwards`;
-                bubblesContainer.appendChild(bubble);
-                setTimeout(() => bubble.remove(), remDuration * 1000);
-            } else {
-                bubble.style.bottom = '-40px';
-                bubble.style.animation = `floatUpImg ${duration}s linear forwards`;
-                bubblesContainer.appendChild(bubble);
-                setTimeout(() => bubble.remove(), duration * 1000);
+            const duration = Math.random() * 4 + 5.5; // 5.5s - 9.5s
+            const delay = isInitial ? -Math.random() * duration : 0;
+            bubble.style.animation = `floatUpImg ${duration}s linear ${delay}s infinite`;
+            bubblesContainer.appendChild(bubble);
+        }
+
+        // Seed initial bubbles across screen height with negative delays
+        for (let i = 0; i < 15; i++) {
+            createBubble(true);
+        }
+
+        // Maintain healthy bubble count
+        let bubbleInterval = setInterval(() => {
+            if (!document.hidden && bubblesContainer && bubblesContainer.childElementCount < 18) {
+                createBubble(false);
             }
-        }
+        }, 800);
 
-        // Seed initial bubbles immediately across screen height on page load
-        for (let i = 0; i < 10; i++) {
-            createBubble(Math.random() * 80 + 10);
-        }
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearInterval(bubbleInterval);
+            } else {
+                bubbleInterval = setInterval(() => {
+                    if (bubblesContainer && bubblesContainer.childElementCount < 18) {
+                        createBubble(false);
+                    }
+                }, 800);
+            }
+        });
     </script>
 </body>
 </html>
