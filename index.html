@@ -3971,51 +3971,27 @@ Alamat Pengiriman:
         // Start animation loop initially
         startAnimation();
 
-        // Rising Bubbles & Sparkling Particles Generator (Infinite ambient flow)
+        // Rising Bubbles & Sparkling Particles Generator (18 GPU-accelerated looping particles)
         const bubblesContainer = document.getElementById('bubbles-container');
-        function createBubble(isInitial = false) {
-            if (!bubblesContainer || document.hidden) return;
-            if (bubblesContainer.childElementCount >= 22) return;
+        if (bubblesContainer) {
+            bubblesContainer.innerHTML = '';
+            for (let i = 0; i < 18; i++) {
+                const bubble = document.createElement('img');
+                bubble.src = 'assets/textures/bubble.png';
+                bubble.className = 'bubble-img';
+                bubble.decoding = 'async';
+                const size = Math.random() * 20 + 13; // 13px - 33px
+                bubble.style.width = `${size.toFixed(1)}px`;
+                bubble.style.height = `${size.toFixed(1)}px`;
+                bubble.style.left = `${(Math.random() * 90 + 5).toFixed(1)}%`;
+                bubble.style.bottom = '-40px';
 
-            const bubble = document.createElement('img');
-            bubble.src = 'assets/textures/bubble.png';
-            bubble.className = 'bubble-img';
-            bubble.decoding = 'async';
-            const size = Math.random() * 20 + 13; // 13px - 33px
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            bubble.style.left = `${Math.random() * 90 + 5}%`;
-            bubble.style.bottom = '-40px';
-
-            const duration = Math.random() * 4 + 5.5; // 5.5s - 9.5s
-            const delay = isInitial ? -Math.random() * duration : 0;
-            bubble.style.animation = `floatUpImg ${duration}s linear ${delay}s infinite`;
-            bubblesContainer.appendChild(bubble);
-        }
-
-        // Seed initial bubbles across screen height with negative delays
-        for (let i = 0; i < 15; i++) {
-            createBubble(true);
-        }
-
-        // Maintain healthy bubble count
-        let bubbleInterval = setInterval(() => {
-            if (!document.hidden && bubblesContainer && bubblesContainer.childElementCount < 18) {
-                createBubble(false);
+                const duration = (Math.random() * 4 + 6).toFixed(2); // 6s - 10s
+                const delay = (-Math.random() * duration).toFixed(2);
+                bubble.style.animation = `floatUpImg ${duration}s linear ${delay}s infinite`;
+                bubblesContainer.appendChild(bubble);
             }
-        }, 800);
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                clearInterval(bubbleInterval);
-            } else {
-                bubbleInterval = setInterval(() => {
-                    if (bubblesContainer && bubblesContainer.childElementCount < 18) {
-                        createBubble(false);
-                    }
-                }, 800);
-            }
-        });
+        }
     </script>
 </body>
 </html>
