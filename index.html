@@ -815,11 +815,12 @@
         /* Typography */
         .main-title {
             font-family: var(--font-heading);
-            font-size: clamp(3.5rem, 6.2vw, 7.8rem);
-            line-height: 0.88;
+            font-size: clamp(2.8rem, 4.8vw, 5.8rem);
+            line-height: 0.94;
             font-weight: 400;
             text-transform: none;
-            white-space: nowrap;
+            white-space: normal;
+            max-width: 440px;
             color: var(--color-ink);
             letter-spacing: normal;
             text-shadow: 0 10px 30px var(--color-shadow-black);
@@ -866,10 +867,10 @@
             filter: drop-shadow(0 5px 15px var(--color-shadow-black));
         }
 
-        .l1 { top: 12%; left: 14%; }
-        .l2 { top: 38%; left: 82%; width: 140px; height: 140px; opacity: 0.35; }
-        .l3 { top: 68%; left: 74%; width: 85px; height: 85px; }
-        .l4 { top: 82%; left: 18%; width: 125px; height: 125px; opacity: 0.3; }
+        .l1 { top: 12%; left: 14%; opacity: 0.7; }
+        .l2 { display: none; }
+        .l3 { display: none; }
+        .l4 { display: none; }
 
         /* 3b. Left Column */
         .hero-left {
@@ -1136,15 +1137,15 @@
 
         .berry.no-animation { animation: none !important; }
 
-        .b1 { top: 24%; left: 30%; width: 220px; height: 220px; }
-        .b2 { top: 62%; left: 42%; width: 100px; height: 100px; }
-        .b3 { top: 28%; left: 62%; width: 250px; height: 250px; }
-        .b4 { top: 14%; left: 48%; width: 140px; height: 140px; }
-        .b5 { top: 76%; left: 20%; width: 120px; height: 120px; }
-        .b6 { top: 46%; left: 75%; width: 180px; height: 180px; }
-        .b7 { top: 15%; left: 40%; width: 80px; height: 80px; opacity: 0.7; }
-        .b8 { top: 52%; left: 55%; width: 70px; height: 70px; opacity: 0.6; }
-        .b9 { top: 82%; left: 35%; width: 75px; height: 75px; opacity: 0.7; }
+        .b1 { top: 20%; left: 33%; width: 130px; height: 130px; }
+        .b2 { display: none; }
+        .b3 { display: none; }
+        .b4 { top: 14%; left: 56%; width: 110px; height: 110px; }
+        .b5 { top: 74%; left: 22%; width: 95px; height: 95px; }
+        .b6 { display: none; }
+        .b7 { top: 18%; left: 42%; width: 65px; height: 65px; opacity: 0.6; }
+        .b8 { display: none; }
+        .b9 { display: none; }
 
         /* 3f. Right Column (Flavor Carousel + Side Title) */
         .hero-right {
@@ -1502,9 +1503,12 @@
             }
 
             /* Perimeter Floating 3D Models on Tablet/Mobile */
-            .berries-container,
-            .berries-container-bg,
             .leaves-container {
+                display: none !important;
+            }
+
+            .berries-container,
+            .berries-container-bg {
                 pointer-events: none !important;
                 overflow: hidden;
                 z-index: 1 !important;
@@ -1517,20 +1521,10 @@
                 z-index: 10;
             }
 
-            .b1 { top: 2%; left: 1%; width: 50px; height: 50px; }
-            .b2 { top: 48%; left: 1%; width: 45px; height: 45px; }
-            .b3 { display: none; }
-            .b4 { top: 3%; left: 85%; width: 50px; height: 50px; }
-            .b5 { display: none; }
-            .b6 { display: none; }
-            .b7 { top: 35%; left: 86%; width: 45px; height: 45px; }
-            .b8 { display: none; }
-            .b9 { display: none; }
-
-            .l1 { top: 4%; left: 78%; width: 45px; height: 45px; }
-            .l2 { display: none; }
-            .l3 { top: 64%; left: 84%; width: 50px; height: 50px; }
-            .l4 { display: none; }
+            .b1 { top: 3%; left: 4%; width: 42px; height: 42px; opacity: 0.85; }
+            .b2, .b3, .b5, .b6, .b7, .b8, .b9 { display: none !important; }
+            .b4 { top: 3%; right: 4%; left: auto; width: 42px; height: 42px; opacity: 0.85; }
+            .l1, .l2, .l3, .l4 { display: none !important; }
         }
 
         /* Mobile & Tablet Breakpoint (<= 1024px: Navigation Switch) */
@@ -1805,28 +1799,22 @@
 
         .flavor-grid {
             display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            padding: 0.2rem 0.1rem 0.45rem;
-        }
-
-        .flavor-grid::-webkit-scrollbar {
-            display: none;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            padding: 0.15rem 0;
         }
 
         .flavor-chip {
-            flex-shrink: 0;
-            display: flex;
+            flex: 0 1 auto;
+            display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
-            padding: 0.55rem 0.85rem;
+            gap: 0.45rem;
+            padding: 0.46rem 0.82rem;
             border-radius: 100px;
             background: var(--color-glass-surface);
             border: 1px solid var(--color-glass-border-subtle);
             color: var(--color-ink-muted);
-            font-size: 0.82rem;
+            font-size: 0.81rem;
             font-weight: 500;
             font-family: var(--font-nav);
             cursor: pointer;
@@ -2356,27 +2344,22 @@
                         <button type="button" class="flavor-chip active" data-flavor="berry">
                             <span class="flavor-dot" style="background: #ff5376;"></span>
                             <span class="flavor-chip-name">Berry Americano</span>
-                            <span class="flavor-chip-price">Rp 18k</span>
                         </button>
                         <button type="button" class="flavor-chip" data-flavor="classic">
                             <span class="flavor-dot" style="background: #ffcf87;"></span>
                             <span class="flavor-chip-name">Aren Classic</span>
-                            <span class="flavor-chip-price">Rp 18k</span>
                         </button>
                         <button type="button" class="flavor-chip" data-flavor="strong">
                             <span class="flavor-dot" style="background: #ffaa33;"></span>
                             <span class="flavor-chip-name">Aren Strong</span>
-                            <span class="flavor-chip-price">Rp 18k</span>
                         </button>
                         <button type="button" class="flavor-chip" data-flavor="matcha">
                             <span class="flavor-dot" style="background: #7bd459;"></span>
                             <span class="flavor-chip-name">Matcha Latte</span>
-                            <span class="flavor-chip-price">Rp 18k</span>
                         </button>
                         <button type="button" class="flavor-chip" data-flavor="butterscotch">
                             <span class="flavor-dot" style="background: #f5a623;"></span>
                             <span class="flavor-chip-name">Butterscotch</span>
-                            <span class="flavor-chip-price">Rp 18k</span>
                         </button>
                     </div>
                 </div>
