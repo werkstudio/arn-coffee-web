@@ -2299,24 +2299,25 @@
             letter-spacing: 0.2px;
         }
 
-        .price-unit {
+        .price-sub {
             font-size: 0.72rem;
-            color: var(--color-ink-dim);
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-top: 2px;
         }
 
         .menu-card-actions {
             display: flex;
             align-items: center;
-            gap: 0.45rem;
         }
 
         .menu-order-btn {
             background: var(--accent-color);
             color: var(--color-dark-ink);
             border: none;
-            padding: 0.55rem 1.05rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 100px;
-            font-size: 0.85rem;
+            font-size: 0.86rem;
             font-weight: 700;
             cursor: pointer;
             transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -2328,21 +2329,54 @@
             box-shadow: 0 6px 18px var(--color-accent-dim);
         }
 
-        .menu-3d-btn {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--color-ink);
-            border: 1px solid var(--color-glass-border);
-            padding: 0.55rem 0.75rem;
-            border-radius: 100px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
+        /* Order Modal Options (Size & Shot) */
+        .option-pill-row {
+            display: flex;
+            gap: 0.5rem;
+            width: 100%;
         }
 
-        .menu-3d-btn:hover {
-            background: rgba(255, 255, 255, 0.16);
+        .opt-chip {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 12px;
+            padding: 0.55rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            text-align: left;
+        }
+
+        .opt-chip:hover {
+            background: rgba(255, 255, 255, 0.09);
             border-color: var(--accent-color);
+        }
+
+        .opt-chip.active {
+            background: var(--color-accent-glow);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 12px var(--color-accent-dim);
+        }
+
+        .opt-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--color-ink);
+        }
+
+        .opt-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .opt-desc {
+            font-size: 0.68rem;
+            color: var(--color-ink-muted);
         }
 
         /* Story Section */
@@ -2781,9 +2815,9 @@
     <section id="menu-section" class="menu-section" aria-labelledby="menu-section-title">
         <div class="section-container">
             <div class="section-header">
-                <span class="section-badge">KOLEKSI DINGIN 200ML</span>
+                <span class="section-badge">RACIKAN FRESH · 200ML & 1 LITER</span>
                 <h2 id="menu-section-title" class="section-heading">Pilihan Racikan Signature</h2>
-                <p class="section-subheading">Setiap botol diseduh segar dari biji kopi organik pilihan & susu murni di Roastery Mandalajati Bandung. Rp 18.000 / botol.</p>
+                <p class="section-subheading">Setiap botol diseduh segar dari biji kopi organik pilihan & susu murni di Roastery Mandalajati Bandung. Tersedia kemasan personal 200ml (Rp 18.000) dan kemasan sharing 1 Liter (Rp 80.000).</p>
             </div>
 
             <div class="menu-grid">
@@ -2791,28 +2825,27 @@
                 <article class="menu-card" data-flavor="berry">
                     <div class="menu-card-top">
                         <span class="menu-pill-tag" style="--tag-color: #ff5376;">Signature Fruit</span>
-                        <span class="menu-pill-vol">200ml</span>
+                        <span class="menu-pill-vol">200ml · 1L</span>
                     </div>
                     <div class="menu-card-bottle">
                         <img src="assets/bottles/bottle-berry-americano.webp" alt="ARN Berry Americano" width="943" height="1816" loading="lazy">
                     </div>
                     <div class="menu-card-body">
                         <h3 class="menu-card-title">Berry Americano</h3>
-                        <p class="menu-card-desc">Signature espresso organik + 100% sari buah berry murni. Sensasi fruity segar berenergi.</p>
+                        <p class="menu-card-desc">Signature espresso organik + 100% sari buah berry murni segar. Pilihan Single Shot atau Double Shot.</p>
                         <div class="menu-card-notes">
+                            <span class="note-chip">Single / Double Shot</span>
                             <span class="note-chip">Fruity Berry</span>
-                            <span class="note-chip">Espresso Segar</span>
-                            <span class="note-chip">Cold Brew</span>
+                            <span class="note-chip">Based Espresso</span>
                         </div>
                     </div>
                     <div class="menu-card-footer">
                         <div class="menu-card-price">
-                            <span class="price-val">Rp 18.000</span>
-                            <span class="price-unit">/ botol</span>
+                            <span class="price-val">Rp 18.000 <small style="font-size: 0.72rem; font-weight: 500; opacity: 0.7;">/ 200ml</small></span>
+                            <span class="price-sub">1 Liter: Rp 80.000</span>
                         </div>
                         <div class="menu-card-actions">
-                            <button type="button" class="menu-order-btn" data-flavor="berry">Pesan</button>
-                            <button type="button" class="menu-3d-btn" data-flavor="berry" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                            <button type="button" class="menu-order-btn" data-flavor="berry">Pesan Sekarang</button>
                         </div>
                     </div>
                 </article>
@@ -2821,28 +2854,27 @@
                 <article class="menu-card" data-flavor="classic">
                     <div class="menu-card-top">
                         <span class="menu-pill-tag" style="--tag-color: #ffcf87;">Best Seller</span>
-                        <span class="menu-pill-vol">200ml</span>
+                        <span class="menu-pill-vol">200ml · 1L</span>
                     </div>
                     <div class="menu-card-bottle">
                         <img src="assets/bottles/bottle-latte-classic.webp" alt="ARN Aren Latte Classic" width="943" height="1816" loading="lazy">
                     </div>
                     <div class="menu-card-body">
                         <h3 class="menu-card-title">Aren Latte Classic</h3>
-                        <p class="menu-card-desc">Espresso lembut seimbang, susu murni creamy, dan gula aren organik premium khas Jawa Barat.</p>
+                        <p class="menu-card-desc">Espresso single shot seimbang, susu murni creamy, dan 100% gula aren organik khas Jawa Barat.</p>
                         <div class="menu-card-notes">
+                            <span class="note-chip">Single Shot</span>
                             <span class="note-chip">Gula Aren Alami</span>
-                            <span class="note-chip">Creamy Milk</span>
-                            <span class="note-chip">Smooth</span>
+                            <span class="note-chip">Based Espresso</span>
                         </div>
                     </div>
                     <div class="menu-card-footer">
                         <div class="menu-card-price">
-                            <span class="price-val">Rp 18.000</span>
-                            <span class="price-unit">/ botol</span>
+                            <span class="price-val">Rp 18.000 <small style="font-size: 0.72rem; font-weight: 500; opacity: 0.7;">/ 200ml</small></span>
+                            <span class="price-sub">1 Liter: Rp 80.000</span>
                         </div>
                         <div class="menu-card-actions">
-                            <button type="button" class="menu-order-btn" data-flavor="classic">Pesan</button>
-                            <button type="button" class="menu-3d-btn" data-flavor="classic" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                            <button type="button" class="menu-order-btn" data-flavor="classic">Pesan Sekarang</button>
                         </div>
                     </div>
                 </article>
@@ -2851,28 +2883,27 @@
                 <article class="menu-card" data-flavor="strong">
                     <div class="menu-card-top">
                         <span class="menu-pill-tag" style="--tag-color: #ffaa33;">Double Shot</span>
-                        <span class="menu-pill-vol">200ml</span>
+                        <span class="menu-pill-vol">200ml · 1L</span>
                     </div>
                     <div class="menu-card-bottle">
                         <img src="assets/bottles/bottle-latte-strong.webp" alt="ARN Aren Latte Strong" width="943" height="1816" loading="lazy">
                     </div>
                     <div class="menu-card-body">
                         <h3 class="menu-card-title">Aren Latte Strong</h3>
-                        <p class="menu-card-desc">Double shot espresso intens bagi pecinta karakter kopi tebal, diimbangi manis aren legit.</p>
+                        <p class="menu-card-desc">Double shot espresso intens bagi pecinta karakter kopi tebal berenergi, diimbangi manis legit aren.</p>
                         <div class="menu-card-notes">
-                            <span class="note-chip">Double Espresso</span>
+                            <span class="note-chip">Double Shot</span>
                             <span class="note-chip">Bold Body</span>
-                            <span class="note-chip">Ekstra Fokus</span>
+                            <span class="note-chip">Based Espresso</span>
                         </div>
                     </div>
                     <div class="menu-card-footer">
                         <div class="menu-card-price">
-                            <span class="price-val">Rp 18.000</span>
-                            <span class="price-unit">/ botol</span>
+                            <span class="price-val">Rp 18.000 <small style="font-size: 0.72rem; font-weight: 500; opacity: 0.7;">/ 200ml</small></span>
+                            <span class="price-sub">1 Liter: Rp 80.000</span>
                         </div>
                         <div class="menu-card-actions">
-                            <button type="button" class="menu-order-btn" data-flavor="strong">Pesan</button>
-                            <button type="button" class="menu-3d-btn" data-flavor="strong" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                            <button type="button" class="menu-order-btn" data-flavor="strong">Pesan Sekarang</button>
                         </div>
                     </div>
                 </article>
@@ -2880,29 +2911,28 @@
                 <!-- Card 4: Matcha Latte -->
                 <article class="menu-card" data-flavor="matcha">
                     <div class="menu-card-top">
-                        <span class="menu-pill-tag" style="--tag-color: #7bd459;">Premium Uji</span>
-                        <span class="menu-pill-vol">200ml</span>
+                        <span class="menu-pill-tag" style="--tag-color: #7bd459;">Real Matcha</span>
+                        <span class="menu-pill-vol">200ml · 1L</span>
                     </div>
                     <div class="menu-card-bottle">
-                        <img src="assets/bottles/bottle-matcha.webp" alt="ARN Matcha Latte" width="943" height="1816" loading="lazy">
+                        <img src="assets/bottles/bottle-matcha-latte.webp" alt="ARN Matcha Latte" width="943" height="1816" loading="lazy">
                     </div>
                     <div class="menu-card-body">
                         <h3 class="menu-card-title">Matcha Latte</h3>
-                        <p class="menu-card-desc">Bubuk green tea matcha autentik dipadu susu segar gurih. Aroma floral lembut tanpa kopi.</p>
+                        <p class="menu-card-desc">Bubuk green tea matcha artisan autentik dipadu susu segar gurih alami. Aroma floral lembut tanpa kopi.</p>
                         <div class="menu-card-notes">
-                            <span class="note-chip">Autentik Uji</span>
+                            <span class="note-chip">Real Matcha Uji</span>
                             <span class="note-chip">Non-Coffee</span>
-                            <span class="note-chip">Calming</span>
+                            <span class="note-chip">Creamy Milk</span>
                         </div>
                     </div>
                     <div class="menu-card-footer">
                         <div class="menu-card-price">
-                            <span class="price-val">Rp 18.000</span>
-                            <span class="price-unit">/ botol</span>
+                            <span class="price-val">Rp 18.000 <small style="font-size: 0.72rem; font-weight: 500; opacity: 0.7;">/ 200ml</small></span>
+                            <span class="price-sub">1 Liter: Rp 80.000</span>
                         </div>
                         <div class="menu-card-actions">
-                            <button type="button" class="menu-order-btn" data-flavor="matcha">Pesan</button>
-                            <button type="button" class="menu-3d-btn" data-flavor="matcha" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                            <button type="button" class="menu-order-btn" data-flavor="matcha">Pesan Sekarang</button>
                         </div>
                     </div>
                 </article>
@@ -2911,28 +2941,27 @@
                 <article class="menu-card" data-flavor="butterscotch">
                     <div class="menu-card-top">
                         <span class="menu-pill-tag" style="--tag-color: #f5a623;">Menu Baru 🔥</span>
-                        <span class="menu-pill-vol">200ml</span>
+                        <span class="menu-pill-vol">200ml · 1L</span>
                     </div>
                     <div class="menu-card-bottle">
                         <img src="assets/bottles/bottle-butterscotch.webp" alt="ARN Butterscotch Latte" width="943" height="1816" loading="lazy">
                     </div>
                     <div class="menu-card-body">
                         <h3 class="menu-card-title">Butterscotch Latte</h3>
-                        <p class="menu-card-desc">Espresso organik, butter gurih, & toffee keemasan manis gurih alami. Rasa mewah memikat.</p>
+                        <p class="menu-card-desc">Signature espresso organik, butter gurih & toffee keemasan manis gurih alami. Pilihan Single atau Double Shot.</p>
                         <div class="menu-card-notes">
+                            <span class="note-chip">Single / Double Shot</span>
                             <span class="note-chip">Golden Toffee</span>
-                            <span class="note-chip">Rich Butter</span>
-                            <span class="note-chip">Sweet & Savory</span>
+                            <span class="note-chip">Based Espresso</span>
                         </div>
                     </div>
                     <div class="menu-card-footer">
                         <div class="menu-card-price">
-                            <span class="price-val">Rp 18.000</span>
-                            <span class="price-unit">/ botol</span>
+                            <span class="price-val">Rp 18.000 <small style="font-size: 0.72rem; font-weight: 500; opacity: 0.7;">/ 200ml</small></span>
+                            <span class="price-sub">1 Liter: Rp 80.000</span>
                         </div>
                         <div class="menu-card-actions">
-                            <button type="button" class="menu-order-btn" data-flavor="butterscotch">Pesan</button>
-                            <button type="button" class="menu-3d-btn" data-flavor="butterscotch" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                            <button type="button" class="menu-order-btn" data-flavor="butterscotch">Pesan Sekarang</button>
                         </div>
                     </div>
                 </article>
@@ -2991,7 +3020,7 @@
                 </div>
                 <span>ARN Coffee · Kota Bandung</span>
             </div>
-            <p class="footer-copy">© 2026 ARN Coffee. 200ml Cold Brew Bottles.</p>
+            <p class="footer-copy">© 2026 ARN Coffee. Fresh Bottled Espresso (200ml & 1 Liter) · Kota Bandung.</p>
             <div class="footer-links">
                 <a href="#menu-section">Menu Varian</a>
                 <a href="#story-section">Tentang Racikan</a>
@@ -3005,7 +3034,7 @@
         <div class="modal-container glass-modal" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
             <div class="modal-header">
                 <div class="modal-header-text">
-                    <span class="modal-subtitle">Kemasan Botol Dingin 200ml</span>
+                    <span class="modal-subtitle">Pilihan Botol Fresh 200ml & 1 Liter</span>
                     <h3 class="modal-title" id="order-modal-title">Pesan ARN Coffee</h3>
                 </div>
                 <button type="button" class="modal-close-btn" id="order-modal-close" aria-label="Tutup modal">&times;</button>
@@ -3014,7 +3043,7 @@
             <div class="modal-body order-modal-body">
                 <!-- 1. The 2x2 Balanced Variant Grid -->
                 <div class="order-flavor-section">
-                    <span class="order-section-title">Pilih varian rasa</span>
+                    <span class="order-section-title">1. Pilih Varian Rasa</span>
                     <div class="flavor-grid">
                         <button type="button" class="flavor-chip active" data-flavor="berry">
                             <span class="flavor-dot" style="background: #ff5376;"></span>
@@ -3039,7 +3068,37 @@
                     </div>
                 </div>
 
-                <!-- 2. Active Flavor Highlight (Seamless, no card-in-card) -->
+                <!-- 2. Size Selector (200ml vs 1L) -->
+                <div class="order-flavor-section">
+                    <span class="order-section-title">2. Pilih Ukuran Botol</span>
+                    <div class="option-pill-row">
+                        <button type="button" class="opt-chip size-chip active" data-size="200ml" data-price="18000">
+                            <span class="opt-label">200ml (Personal)</span>
+                            <span class="opt-badge">Rp 18.000</span>
+                        </button>
+                        <button type="button" class="opt-chip size-chip" data-size="1L" data-price="80000">
+                            <span class="opt-label">1 Liter (Sharing)</span>
+                            <span class="opt-badge">Rp 80.000</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Shot Selector (Single vs Double Shot for Berry, Butterscotch) -->
+                <div class="order-flavor-section" id="order-shot-section">
+                    <span class="order-section-title">3. Pilihan Espresso Shot</span>
+                    <div class="option-pill-row">
+                        <button type="button" class="opt-chip shot-chip active" data-shot="Single Shot">
+                            <span class="opt-label">Single Shot</span>
+                            <span class="opt-desc">Smooth & Balanced</span>
+                        </button>
+                        <button type="button" class="opt-chip shot-chip" data-shot="Double Shot">
+                            <span class="opt-label">Double Shot</span>
+                            <span class="opt-desc">Bold & Extra Kick</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Active Flavor Highlight (Seamless, no card-in-card) -->
                 <div class="modal-flavor-preview">
                     <div class="modal-bottle-thumb">
                         <img id="order-bottle-img" src="assets/bottles/bottle-berry-americano.webp" alt="Varian Botol ARN Coffee" width="943" height="1816" loading="lazy">
@@ -3049,11 +3108,11 @@
                             <h4 id="order-flavor-name">Berry Americano</h4>
                             <span class="modal-flavor-price" id="order-flavor-price">Rp 18.000 / botol</span>
                         </div>
-                        <p id="order-flavor-desc">Signature espresso organik + 100% sari buah berry murni asli (200ml).</p>
+                        <p id="order-flavor-desc">Signature espresso organik + 100% sari buah berry murni.</p>
                     </div>
                 </div>
 
-                <!-- 3. Quantity Stepper + Live Total Price (Unified in 1 elegant horizontal row) -->
+                <!-- 5. Quantity Stepper + Live Total Price (Unified in 1 elegant horizontal row) -->
                 <div class="order-action-row">
                     <div class="order-qty-wrap">
                         <span class="order-qty-label">Jumlah botol</span>
@@ -3328,30 +3387,64 @@
         const orderFlavorPrice = document.getElementById('order-flavor-price');
         const orderTotalPrice = document.getElementById('order-total-price');
         const orderWaSubmit = document.getElementById('order-wa-submit');
+        const orderShotSection = document.getElementById('order-shot-section');
         const qtyMinus = document.getElementById('qty-minus');
         const qtyPlus = document.getElementById('qty-plus');
         const qtyValue = document.getElementById('qty-value');
 
         let orderQuantity = 1;
+        let selectedSize = '200ml';
+        let selectedPrice = 18000;
+        let selectedShot = 'Single Shot';
         const WA_PHONE_NUMBER = '6285863002824';
+
+        // Size chips listener
+        document.querySelectorAll('.size-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                selectedSize = chip.dataset.size || '200ml';
+                selectedPrice = parseInt(chip.dataset.price, 10) || 18000;
+                updateOrderSummary();
+            });
+        });
+
+        // Shot chips listener
+        document.querySelectorAll('.shot-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.shot-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                selectedShot = chip.dataset.shot || 'Single Shot';
+                updateOrderSummary();
+            });
+        });
 
         function updateOrderSummary() {
             const currentFlavor = flavors[activeFlavorIndex];
             const cfg = flavorConfigs[currentFlavor];
             if (!cfg) return;
 
+            // Handle shot option visibility: Berry and Butterscotch allow Single/Double Shot
+            const hasShotOption = (currentFlavor === 'berry' || currentFlavor === 'butterscotch');
+            if (orderShotSection) {
+                orderShotSection.style.display = hasShotOption ? 'block' : 'none';
+            }
+
             if (orderBottleImg) orderBottleImg.src = cfg.bottleSrc;
             if (orderFlavorName) orderFlavorName.textContent = cfg.name;
             if (orderFlavorDesc) orderFlavorDesc.textContent = cfg.shortDesc;
-            if (orderFlavorPrice) orderFlavorPrice.textContent = `${cfg.price} / botol`;
+
+            const unitPriceLabel = `Rp ${selectedPrice.toLocaleString('id-ID')}`;
+            if (orderFlavorPrice) orderFlavorPrice.textContent = `${unitPriceLabel} / botol (${selectedSize})`;
             if (qtyValue) qtyValue.textContent = orderQuantity;
 
-            const totalNum = cfg.priceNum * orderQuantity;
+            const totalNum = selectedPrice * orderQuantity;
             const totalFormatted = `Rp ${totalNum.toLocaleString('id-ID')}`;
             if (orderTotalPrice) orderTotalPrice.textContent = totalFormatted;
 
+            const shotText = hasShotOption ? ` [${selectedShot}]` : '';
             const message = `Halo ARN Coffee Bandung, saya ingin memesan:
-• ${orderQuantity}x ${cfg.name} (200ml @ ${cfg.price})
+• ${orderQuantity}x ${cfg.name} (${selectedSize}${shotText} @ ${unitPriceLabel})
 Estimasi Total: ${totalFormatted}
 
 Alamat Pengiriman: 
@@ -3575,20 +3668,6 @@ Alamat Pengiriman:
                     switchFlavor(flavor);
                 }
                 openModal(orderModalOverlay);
-            });
-        });
-
-        document.querySelectorAll('.menu-3d-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const flavor = btn.dataset.flavor;
-                const idx = flavors.indexOf(flavor);
-                if (idx !== -1) {
-                    activeFlavorIndex = idx;
-                    syncActiveElements();
-                    switchFlavor(flavor);
-                }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
 
@@ -3942,9 +4021,6 @@ Alamat Pengiriman:
                 isAnimationActive = true;
                 animFrameId = requestAnimationFrame(animate);
             }
-            if (!bubbleIntervalId) {
-                bubbleIntervalId = setInterval(createBubble, 450);
-            }
         }
 
         function stopAnimation() {
@@ -3952,10 +4028,6 @@ Alamat Pengiriman:
             if (animFrameId) {
                 cancelAnimationFrame(animFrameId);
                 animFrameId = null;
-            }
-            if (bubbleIntervalId) {
-                clearInterval(bubbleIntervalId);
-                bubbleIntervalId = null;
             }
         }
 
