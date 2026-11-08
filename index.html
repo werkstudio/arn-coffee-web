@@ -291,8 +291,7 @@
             background: radial-gradient(circle at center, var(--bg-inner) 0%, var(--bg-mid) 50%, var(--bg-outer) 100%);
             color: var(--text-color);
             font-family: var(--font-main);
-            overflow: hidden; /* Remove scroll on desktop */
-            height: 100dvh;
+            overflow-x: clip;
             min-height: 100dvh;
             width: 100%;
             position: relative;
@@ -346,25 +345,30 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 25;
             overflow: hidden;
         }
 
         .bubble-img {
             position: absolute;
             pointer-events: none;
-            filter: drop-shadow(0 0 6px var(--color-bubble-shadow));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+            will-change: transform, opacity;
         }
 
         @keyframes floatUpImg {
             0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
+                transform: translateY(0) translateX(0) scale(0.7);
                 opacity: 0;
             }
-            10% { opacity: 0.45; }
-            90% { opacity: 0.45; }
+            15% {
+                opacity: 0.85;
+            }
+            85% {
+                opacity: 0.85;
+            }
             100% {
-                transform: translateY(-110vh) translateX(30px) rotate(360deg);
+                transform: translateY(-110vh) translateX(35px) scale(1.1);
                 opacity: 0;
             }
         }
@@ -2080,6 +2084,440 @@
             color: var(--color-ink-muted);
             line-height: 1.45;
         }
+
+        /* 9. Scroll Down CTA & Sections */
+        .scroll-down-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: var(--color-ink);
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border);
+            padding: 0.75rem 1.35rem;
+            border-radius: 100px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .scroll-down-btn:hover {
+            background: var(--color-glass-surface-hover);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .menu-section,
+        .story-section {
+            width: 100%;
+            position: relative;
+            z-index: 30;
+            padding: 6rem 4% 5rem;
+        }
+
+        .section-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 3.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .section-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            background: var(--color-accent-glow);
+            border: 1px solid var(--color-accent-dim);
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+        }
+
+        .section-heading {
+            font-family: var(--font-heading);
+            font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+            color: var(--color-ink);
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+            text-shadow: 0 8px 24px var(--color-shadow-black);
+        }
+
+        .section-subheading {
+            font-size: 0.98rem;
+            color: var(--color-ink-muted);
+            line-height: 1.6;
+        }
+
+        /* Menu Grid (Responsive, Cards With Ample Breathing Room) */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .menu-card {
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 24px;
+            padding: 1.5rem 1.25rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 12px 36px var(--color-shadow-black);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-color);
+            box-shadow: 0 18px 48px var(--color-shadow-black), 0 0 24px var(--color-accent-dim);
+        }
+
+        .menu-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-pill-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--tag-color, var(--accent-color));
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.25rem 0.65rem;
+            border-radius: 100px;
+        }
+
+        .menu-pill-vol {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-ink-dim);
+        }
+
+        .menu-card-bottle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+            height: 220px;
+        }
+
+        .menu-card-bottle img {
+            max-height: 200px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.6));
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .menu-card:hover .menu-card-bottle img {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        .menu-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            flex: 1;
+        }
+
+        .menu-card-title {
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            line-height: 1.25;
+        }
+
+        .menu-card-desc {
+            font-size: 0.84rem;
+            color: var(--color-ink-muted);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .menu-card-notes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin: 0.75rem 0;
+        }
+
+        .note-chip {
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--color-ink-muted);
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .menu-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-glass-border-subtle);
+            margin-top: auto;
+        }
+
+        .menu-card-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--color-ink);
+            letter-spacing: 0.2px;
+        }
+
+        .price-unit {
+            font-size: 0.72rem;
+            color: var(--color-ink-dim);
+        }
+
+        .menu-card-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .menu-order-btn {
+            background: var(--accent-color);
+            color: var(--color-dark-ink);
+            border: none;
+            padding: 0.55rem 1.05rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-order-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px var(--color-accent-dim);
+        }
+
+        .menu-3d-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--color-ink);
+            border: 1px solid var(--color-glass-border);
+            padding: 0.55rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .menu-3d-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: var(--accent-color);
+        }
+
+        /* Story Section */
+        .story-section {
+            padding-top: 2rem;
+            padding-bottom: 6rem;
+        }
+
+        .story-card {
+            background: var(--color-glass-surface);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 28px;
+            padding: 3rem 3rem;
+            box-shadow: 0 16px 48px var(--color-shadow-black);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .story-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 3.6vw, 3rem);
+            color: var(--color-ink);
+            line-height: 1.15;
+            margin: 0.8rem 0 1rem;
+        }
+
+        .story-text {
+            font-size: 0.96rem;
+            color: var(--color-ink-muted);
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+        }
+
+        .story-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+        }
+
+        .story-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+        }
+
+        .feat-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            margin-top: 0.4rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .story-feature-item strong {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--color-ink);
+            margin-bottom: 0.2rem;
+        }
+
+        .story-feature-item p {
+            font-size: 0.83rem;
+            color: var(--color-ink-muted);
+            line-height: 1.45;
+        }
+
+        .story-info-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--color-glass-border-subtle);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .info-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+        }
+
+        .info-val {
+            font-size: 0.92rem;
+            color: var(--color-ink);
+            line-height: 1.5;
+        }
+
+        .story-wa-cta {
+            margin-top: 1.25rem;
+            background: #25d366;
+            color: #0b2313;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.85rem 1.25rem;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            display: inline-block;
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        .story-wa-cta:hover {
+            filter: brightness(1.08);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            border-top: 1px solid var(--color-glass-border-subtle);
+            padding: 2.5rem 4%;
+            background: rgba(10, 3, 5, 0.85);
+            position: relative;
+            z-index: 30;
+        }
+
+        .footer-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-ink);
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            color: var(--color-ink-dim);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .footer-links a {
+            color: var(--color-ink-muted);
+            text-decoration: none;
+            font-size: 0.84rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 900px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .story-card {
+                padding: 2rem 1.5rem;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -2206,6 +2644,9 @@
                         Pesan Sekarang
                         <span class="plus-icon">+</span>
                     </button>
+                    <a href="#menu-section" class="scroll-down-btn">
+                        Lihat Menu ▾
+                    </a>
                 </div>
                 <div class="award-badge desktop-award-badge" id="desktop-story-badge" role="button" tabindex="0" aria-label="Lihat keaslian racikan ARN Coffee" title="Klik untuk lihat detail racikan & lokasi">
                     <div class="award-icon">
@@ -2329,6 +2770,229 @@
             </div>
         </div>
     </main>
+
+    <!-- 4. Menu Showcase Section (Scrollable, Generous Grid for all 5 Flavors) -->
+    <section id="menu-section" class="menu-section" aria-labelledby="menu-section-title">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">KOLEKSI DINGIN 200ML</span>
+                <h2 id="menu-section-title" class="section-heading">Pilihan Racikan Signature</h2>
+                <p class="section-subheading">Setiap botol diseduh segar dari biji kopi organik pilihan & susu murni di Roastery Mandalajati Bandung. Rp 18.000 / botol.</p>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Card 1: Berry Americano -->
+                <article class="menu-card" data-flavor="berry">
+                    <div class="menu-card-top">
+                        <span class="menu-pill-tag" style="--tag-color: #ff5376;">Signature Fruit</span>
+                        <span class="menu-pill-vol">200ml</span>
+                    </div>
+                    <div class="menu-card-bottle">
+                        <img src="assets/bottles/bottle-berry-americano.webp" alt="ARN Berry Americano" width="943" height="1816" loading="lazy">
+                    </div>
+                    <div class="menu-card-body">
+                        <h3 class="menu-card-title">Berry Americano</h3>
+                        <p class="menu-card-desc">Signature espresso organik + 100% sari buah berry murni. Sensasi fruity segar berenergi.</p>
+                        <div class="menu-card-notes">
+                            <span class="note-chip">Fruity Berry</span>
+                            <span class="note-chip">Espresso Segar</span>
+                            <span class="note-chip">Cold Brew</span>
+                        </div>
+                    </div>
+                    <div class="menu-card-footer">
+                        <div class="menu-card-price">
+                            <span class="price-val">Rp 18.000</span>
+                            <span class="price-unit">/ botol</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button type="button" class="menu-order-btn" data-flavor="berry">Pesan</button>
+                            <button type="button" class="menu-3d-btn" data-flavor="berry" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Aren Classic -->
+                <article class="menu-card" data-flavor="classic">
+                    <div class="menu-card-top">
+                        <span class="menu-pill-tag" style="--tag-color: #ffcf87;">Best Seller</span>
+                        <span class="menu-pill-vol">200ml</span>
+                    </div>
+                    <div class="menu-card-bottle">
+                        <img src="assets/bottles/bottle-latte-classic.webp" alt="ARN Aren Latte Classic" width="943" height="1816" loading="lazy">
+                    </div>
+                    <div class="menu-card-body">
+                        <h3 class="menu-card-title">Aren Latte Classic</h3>
+                        <p class="menu-card-desc">Espresso lembut seimbang, susu murni creamy, dan gula aren organik premium khas Jawa Barat.</p>
+                        <div class="menu-card-notes">
+                            <span class="note-chip">Gula Aren Alami</span>
+                            <span class="note-chip">Creamy Milk</span>
+                            <span class="note-chip">Smooth</span>
+                        </div>
+                    </div>
+                    <div class="menu-card-footer">
+                        <div class="menu-card-price">
+                            <span class="price-val">Rp 18.000</span>
+                            <span class="price-unit">/ botol</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button type="button" class="menu-order-btn" data-flavor="classic">Pesan</button>
+                            <button type="button" class="menu-3d-btn" data-flavor="classic" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Aren Strong -->
+                <article class="menu-card" data-flavor="strong">
+                    <div class="menu-card-top">
+                        <span class="menu-pill-tag" style="--tag-color: #ffaa33;">Double Shot</span>
+                        <span class="menu-pill-vol">200ml</span>
+                    </div>
+                    <div class="menu-card-bottle">
+                        <img src="assets/bottles/bottle-latte-strong.webp" alt="ARN Aren Latte Strong" width="943" height="1816" loading="lazy">
+                    </div>
+                    <div class="menu-card-body">
+                        <h3 class="menu-card-title">Aren Latte Strong</h3>
+                        <p class="menu-card-desc">Double shot espresso intens bagi pecinta karakter kopi tebal, diimbangi manis aren legit.</p>
+                        <div class="menu-card-notes">
+                            <span class="note-chip">Double Espresso</span>
+                            <span class="note-chip">Bold Body</span>
+                            <span class="note-chip">Ekstra Fokus</span>
+                        </div>
+                    </div>
+                    <div class="menu-card-footer">
+                        <div class="menu-card-price">
+                            <span class="price-val">Rp 18.000</span>
+                            <span class="price-unit">/ botol</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button type="button" class="menu-order-btn" data-flavor="strong">Pesan</button>
+                            <button type="button" class="menu-3d-btn" data-flavor="strong" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4: Matcha Latte -->
+                <article class="menu-card" data-flavor="matcha">
+                    <div class="menu-card-top">
+                        <span class="menu-pill-tag" style="--tag-color: #7bd459;">Premium Uji</span>
+                        <span class="menu-pill-vol">200ml</span>
+                    </div>
+                    <div class="menu-card-bottle">
+                        <img src="assets/bottles/bottle-matcha.webp" alt="ARN Matcha Latte" width="943" height="1816" loading="lazy">
+                    </div>
+                    <div class="menu-card-body">
+                        <h3 class="menu-card-title">Matcha Latte</h3>
+                        <p class="menu-card-desc">Bubuk green tea matcha autentik dipadu susu segar gurih. Aroma floral lembut tanpa kopi.</p>
+                        <div class="menu-card-notes">
+                            <span class="note-chip">Autentik Uji</span>
+                            <span class="note-chip">Non-Coffee</span>
+                            <span class="note-chip">Calming</span>
+                        </div>
+                    </div>
+                    <div class="menu-card-footer">
+                        <div class="menu-card-price">
+                            <span class="price-val">Rp 18.000</span>
+                            <span class="price-unit">/ botol</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button type="button" class="menu-order-btn" data-flavor="matcha">Pesan</button>
+                            <button type="button" class="menu-3d-btn" data-flavor="matcha" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5: Butterscotch Latte -->
+                <article class="menu-card" data-flavor="butterscotch">
+                    <div class="menu-card-top">
+                        <span class="menu-pill-tag" style="--tag-color: #f5a623;">Menu Baru 🔥</span>
+                        <span class="menu-pill-vol">200ml</span>
+                    </div>
+                    <div class="menu-card-bottle">
+                        <img src="assets/bottles/bottle-butterscotch.webp" alt="ARN Butterscotch Latte" width="943" height="1816" loading="lazy">
+                    </div>
+                    <div class="menu-card-body">
+                        <h3 class="menu-card-title">Butterscotch Latte</h3>
+                        <p class="menu-card-desc">Espresso organik, butter gurih, & toffee keemasan manis gurih alami. Rasa mewah memikat.</p>
+                        <div class="menu-card-notes">
+                            <span class="note-chip">Golden Toffee</span>
+                            <span class="note-chip">Rich Butter</span>
+                            <span class="note-chip">Sweet & Savory</span>
+                        </div>
+                    </div>
+                    <div class="menu-card-footer">
+                        <div class="menu-card-price">
+                            <span class="price-val">Rp 18.000</span>
+                            <span class="price-unit">/ botol</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button type="button" class="menu-order-btn" data-flavor="butterscotch">Pesan</button>
+                            <button type="button" class="menu-3d-btn" data-flavor="butterscotch" title="Lihat varian ini di 3D Hero" aria-label="Lihat di 3D">3D ↺</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Story & Roastery Section -->
+    <section id="story-section" class="story-section" aria-labelledby="story-heading">
+        <div class="section-container">
+            <div class="story-card glass-modal">
+                <div class="story-grid">
+                    <div class="story-col-left">
+                        <span class="section-badge">FILOSOFI RACIKAN</span>
+                        <h2 id="story-heading" class="story-title">Dari Biji Pilihan ke Botol Dingin Anda</h2>
+                        <p class="story-text">ARN Coffee lahir dari kecintaan menyajikan kopi berkualitas kafe spesialti dalam kemasan botol siap minum yang higienis, praktis, dan ramah kantong.</p>
+                        <div class="story-features">
+                            <div class="story-feature-item">
+                                <span class="feat-dot"></span>
+                                <div>
+                                    <strong>100% Organik & Alami</strong>
+                                    <p>Tanpa pengawet buatan, pemanis sintetis, atau pewarna tambahan.</p>
+                                </div>
+                            </div>
+                            <div class="story-feature-item">
+                                <span class="feat-dot"></span>
+                                <div>
+                                    <strong>Roastery Mandalajati Bandung</strong>
+                                    <p>Diracik dan dibotolkan fresh setiap hari kerja untuk menjaga aroma maksimal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-col-right">
+                        <div class="story-info-box">
+                            <span class="info-label">PENGIRIMAN DINGIN</span>
+                            <p class="info-val">Kota Bandung & Sekitarnya via Kurir Instan / Same Day</p>
+                            <span class="info-label" style="margin-top: 1rem;">JAM OPERASIONAL</span>
+                            <p class="info-val">Senin – Sabtu: 08:00 – 17:00 WIB<br><span style="opacity: 0.65; font-size: 0.85rem;">Minggu: Pengiriman via appointment</span></p>
+                            <a href="https://wa.me/6285863002824?text=Halo%20ARN%20Coffee%2C%20saya%20mau%20tanya%20pesanan%20kopi%20botol" target="_blank" rel="noopener noreferrer" class="story-wa-cta">
+                                Chat WhatsApp Langsung
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-icon" style="width: 32px; height: 32px;">
+                    <img src="assets/logo-tiger-transparent.webp" alt="ARN Coffee Mascot" width="128" height="128" style="width: 24px; height: 24px;">
+                </div>
+                <span>ARN Coffee · Kota Bandung</span>
+            </div>
+            <p class="footer-copy">© 2026 ARN Coffee. 200ml Cold Brew Bottles.</p>
+            <div class="footer-links">
+                <a href="#menu-section">Menu Varian</a>
+                <a href="#story-section">Tentang Racikan</a>
+                <a href="https://wa.me/6285863002824" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Order Modal -->
     <div class="modal-overlay" id="order-modal-overlay" aria-hidden="true">
@@ -2893,6 +3557,35 @@ Alamat Pengiriman:
             });
         });
 
+        // Menu Section Handlers
+        document.querySelectorAll('.menu-order-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const flavor = btn.dataset.flavor;
+                const idx = flavors.indexOf(flavor);
+                if (idx !== -1) {
+                    activeFlavorIndex = idx;
+                    syncActiveElements();
+                    switchFlavor(flavor);
+                }
+                openModal(orderModalOverlay);
+            });
+        });
+
+        document.querySelectorAll('.menu-3d-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const flavor = btn.dataset.flavor;
+                const idx = flavors.indexOf(flavor);
+                if (idx !== -1) {
+                    activeFlavorIndex = idx;
+                    syncActiveElements();
+                    switchFlavor(flavor);
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
         // Navigation Arrows
         prevBtn.addEventListener('click', () => {
             if (isSwitching) return;
@@ -3272,28 +3965,40 @@ Alamat Pengiriman:
         // Start animation loop initially
         startAnimation();
 
-        // Rising Bubbles & Sparkling Particles Generator (Capped at 16 elements to avoid DOM churn)
+        // Rising Bubbles & Sparkling Particles Generator (Capped at 24 elements)
         const bubblesContainer = document.getElementById('bubbles-container');
-        function createBubble() {
+        function createBubble(initialY = null) {
             if (!bubblesContainer || document.hidden) return;
-            if (bubblesContainer.childElementCount >= 16) return;
+            if (bubblesContainer.childElementCount >= 24) return;
 
             const bubble = document.createElement('img');
             bubble.src = 'assets/textures/bubble.png';
             bubble.className = 'bubble-img';
             bubble.decoding = 'async';
-            const size = Math.random() * 20 + 10 + 'px';
+            const size = Math.random() * 22 + 12 + 'px';
             bubble.style.width = size;
             bubble.style.height = 'auto';
-            bubble.style.left = Math.random() * 100 + '%';
-            bubble.style.bottom = '-50px';
-            bubble.style.opacity = Math.random() * 0.4 + 0.2;
+            bubble.style.left = Math.random() * 92 + 4 + '%';
 
-            const duration = Math.random() * 6 + 4;
-            bubble.style.animation = `floatUpImg ${duration}s linear forwards`;
+            const duration = Math.random() * 5 + 4.5;
+            if (initialY !== null) {
+                bubble.style.bottom = initialY + '%';
+                const remainingRatio = Math.max(0.1, (100 - initialY) / 100);
+                const remDuration = (duration * remainingRatio).toFixed(2);
+                bubble.style.animation = `floatUpImg ${remDuration}s linear forwards`;
+                bubblesContainer.appendChild(bubble);
+                setTimeout(() => bubble.remove(), remDuration * 1000);
+            } else {
+                bubble.style.bottom = '-40px';
+                bubble.style.animation = `floatUpImg ${duration}s linear forwards`;
+                bubblesContainer.appendChild(bubble);
+                setTimeout(() => bubble.remove(), duration * 1000);
+            }
+        }
 
-            bubblesContainer.appendChild(bubble);
-            setTimeout(() => bubble.remove(), duration * 1000);
+        // Seed initial bubbles immediately across screen height on page load
+        for (let i = 0; i < 10; i++) {
+            createBubble(Math.random() * 80 + 10);
         }
     </script>
 </body>
